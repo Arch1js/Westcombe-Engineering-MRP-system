@@ -1,16 +1,19 @@
 body {
 
 }
+table {
+  width: 100%;
+}
 .navbar-brand {
-padding: 5px 15px;
+  padding: 5px 15px;
 }
 #profile_image
 {
-    height: 50px;
-    width: 50px;
-    border: 1px solid white;
-    border-radius: 30px;
-    margin-left: 10px;
+  height: 50px;
+  width: 50px;
+  border: 1px solid white;
+  border-radius: 30px;
+  margin-left: 10px;
 }
 #content {
   color:white;
@@ -23,10 +26,18 @@ padding: 5px 15px;
   float:right;
   display: inline-block;
 }
+#paginator_bottom {
+  float:right;
+  display: inline-block;
+}
 .pagination {
 	margin: 5px 0px;
 	float: right;
 }
 #page_controller {
   float:right;
+}
+#action_buttons {
+  display: inline-block;
+  margin-left: 5px;
 }
