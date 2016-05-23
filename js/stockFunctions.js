@@ -1,6 +1,6 @@
 var app = angular.module('WEapp', ['ui.bootstrap']);
 
-function mainCtrl($scope, $http, $filter) { //main controller for stock page
+function stockCtrl($scope, $http, $filter) { //main controller for stock page
   $scope.data = [];
   $scope.data2 = [];
 

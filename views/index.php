@@ -28,7 +28,7 @@ $userRow=mysqli_fetch_array($res);
 	<script src="/js/directives.js"></script>
 </head>
 <body>
-	<div ng-controller="mainCtrl">
+	<div>
 	<nav class="navbar navbar-inverse navbar-default">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,7 +48,7 @@ $userRow=mysqli_fetch_array($res);
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="/index.php">Home<span class="sr-only">(current)</span></a></li>
-	        <li><a href="#">Orders</a></li>
+	        <li><a href="/views/orders.php">Orders</a></li>
 	        <li><a href="/views/stock.php">Stock</a></li>
 	        <li><a href="#">Jobs</a></li>
 	        <li><a href="#">Metrics</a></li>

@@ -26,6 +26,6 @@ if(isset($_SESSION['user'])!="")
     }
 else
     {
-    header("location: access_denied.html");
+    header("location: /views/access_denied.html");
     }
     ?>
