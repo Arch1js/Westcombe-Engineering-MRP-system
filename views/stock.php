@@ -26,12 +26,12 @@ $userRow=mysqli_fetch_array($res);
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script><!-- Bootstrap JS -->
 
 	<!-- Services -->
-	<script src="/js/stockFunctions.js"></script>
+	<script src="/js/functions.js"></script>
 	<!-- Directives -->
 	<script src="/js/directives.js"></script>
 </head>
 <body>
-	<div ng-controller="stockCtrl">
+	<div ng-controller="mainCtrl">
 	<nav class="navbar navbar-inverse navbar-default">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -52,7 +52,7 @@ $userRow=mysqli_fetch_array($res);
 	      <ul class="nav navbar-nav">
 	        <li><a href="/views/index.php">Home</a></li>
 	        <li><a href="/views/orders.php">Orders</a></li>
-	        <li class="active"><a href="/stock.php">Stock</a></li>
+	        <li class="active"><a href="/views/stock.php">Stock</a></li>
 	        <li><a href="#">Jobs</a></li>
 	        <li><a href="#">Metrics</a></li>
 	      </ul>
@@ -288,19 +288,11 @@ $userRow=mysqli_fetch_array($res);
     <thead>
       <tr>
 				<th ng-click="sort('ID')">ID<span class="glyphicon sort-icon" ng-show="sortKey=='ID'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-<<<<<<< HEAD
-        <th ng-click="sort('Finished_Part')">Finished Part# <span class="glyphicon sort-icon" ng-show="sortKey=='Part_No'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-        <th ng-click="sort('Casting_or_Supplier_Pt_No')">Casting or Supplier Pt.No<span class="glyphicon sort-icon" ng-show="sortKey=='Casting_Supplier'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-        <th ng-click="sort('Description')">Description<span class="glyphicon sort-icon" ng-show="sortKey=='Description'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-				<th ng-click="sort('Qty_s_BOM')">Qty's BOM<span class="glyphicon sort-icon" ng-show="sortKey=='BOM'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-				<th ng-click="sort('Additional_Info')">Additional Info<span class="glyphicon sort-icon" ng-show="sortKey=='Add_Info'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-=======
         <th ng-click="sort('Part_No')">Finished Part# <span class="glyphicon sort-icon" ng-show="sortKey=='Part_No'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
         <th ng-click="sort('Casting_Supplier')">Casting or Supplier Pt.No<span class="glyphicon sort-icon" ng-show="sortKey=='Casting_Supplier'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
         <th ng-click="sort('Description')">Description<span class="glyphicon sort-icon" ng-show="sortKey=='Description'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 				<th ng-click="sort('BOM')">Qty's BOM<span class="glyphicon sort-icon" ng-show="sortKey=='BOM'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 				<th ng-click="sort('Add_Info')">Additional Info<span class="glyphicon sort-icon" ng-show="sortKey=='Add_Info'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
->>>>>>> 77a57adef9f2fab992a91a25083b5780fc039b28
 				<th ng-click="sort('Stores_Location')">Stores Location<span class="glyphicon sort-icon" ng-show="sortKey=='Stores_Location'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 				<th ng-click="sort('Finished_Part_Weight_Kg')">Finished Part Weight(kg)<span class="glyphicon sort-icon" ng-show="sortKey=='Finished_Part_Weight_Kg'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 				<th ng-click="sort('P_P_Cost_Raw')">P/P Cost Raw<span class="glyphicon sort-icon" ng-show="sortKey=='P_P_Cost_Raw'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
@@ -335,15 +327,9 @@ $userRow=mysqli_fetch_array($res);
     </tbody>
   </table>
 	<div id="paginator_bottom" class="col-md-4 col-sm-6" ng-show="paginator_bottom">
-<<<<<<< HEAD
-		<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="loadStock(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
-	</div>
-	<div loading></div>
-=======
 	<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="loadStock(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
 	</div>
 			<div loading></div>
->>>>>>> 77a57adef9f2fab992a91a25083b5780fc039b28
 </body>
 <div class="alert alert-danger" ng-show="error" class="col-xs-12">
 		<strong>Error!</strong> No results found. Please try another query!

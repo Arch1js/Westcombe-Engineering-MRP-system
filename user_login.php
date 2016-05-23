@@ -10,7 +10,7 @@ if(isset($_SESSION['user'])!="")
     $userEmail = $_POST['user'];
     $userPassword = $_POST['pass'];
 
-    $sql = "SELECT user_id, email, password FROM administrators WHERE email = ? AND password = md5(?)";
+    $sql = "SELECT user_id, email, password, privilige FROM administrators WHERE email = ? AND password = md5(?)";
 
     $stmt = $mysqli->prepare($sql);
 
@@ -18,14 +18,20 @@ if(isset($_SESSION['user'])!="")
     $stmt->execute();
 
     $stmt->store_result();
-    $stmt->bind_result($id, $user, $passwd);
+    $stmt->bind_result($id, $user, $passwd,$privilige);
     if ($stmt->fetch())
     {
 			$_SESSION["user"] = $id;
-			header("Location: /views/index.php");
+			if($privilige == 'super user') {
+				header("Location: /views/index.php");
+			}
+			else if ($privilige == 'admin') {
+				header("Location: /views/admin_page.php");
+			}
+
     }
 else
     {
     header("location: /views/login_failed.html");
     }
-    ?>
+?>
