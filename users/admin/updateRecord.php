@@ -1,6 +1,6 @@
 <?php
 $data = file_get_contents("php://input");
-require 'dbconnect.php';
+require '../dbconnect.php';
 $objData = json_decode($data);
 
 $sql="UPDATE stock SET Casting_or_Supplier_Pt_No=?,

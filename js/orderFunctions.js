@@ -14,10 +14,10 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
     $scope.loading = true;
     var date = new Date();
     var weekday = date.getDay();
-
+    // var weekday = 1;
 
     if(weekday == 1) { //get data only on Mondays
-      $scope.url = '/writeOrders.php';
+      $scope.url = '/users/super_user/writeOrders.php';
       $http.post($scope.url);
     }
     else {
@@ -40,7 +40,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
              dataCount: incr,
              start: start
        };
-         $scope.url = '/getNewestData.php';
+         $scope.url = '/users/super_user/getNewestData.php';
        $http.post($scope.url, data).
        success(function(data,status) {
 

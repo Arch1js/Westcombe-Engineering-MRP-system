@@ -6,7 +6,9 @@ if(!isset($_SESSION['user']))
 {
 	header("Location: ../validate_session.php");
 }
-
+else if($_SESSION["privilige"] != 'super user') {
+	header("Location: ../access_denied.html");
+}
 $res=mysqli_query($mysqli, "SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
 $userRow=mysqli_fetch_array($res);
 ?>
@@ -17,21 +19,21 @@ $userRow=mysqli_fetch_array($res);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"><!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.css">
-	<link rel="stylesheet" href="/css/stock_style.css" type="text/css" /><!-- login Stylesheet -->
-	<link rel="stylesheet" href="/css/loader_animation.css" type="text/css" /><!-- login Stylesheet -->
+	<link rel="stylesheet" href="../../css/stock_style.css" type="text/css" /><!-- login Stylesheet -->
+	<link rel="stylesheet" href="../../css/loader_animation.css" type="text/css" /><!-- login Stylesheet -->
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.29/angular.js"></script><!-- AngularJS -->
-	<script src="../dependencies/ui-bootstrap-tpls-1.2.5.js"></script><!-- Bootstrap UI -->
+	<script src="../../dependencies/ui-bootstrap-tpls-1.2.5.js"></script><!-- Bootstrap UI -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script><!-- JQuery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script><!-- Bootstrap JS -->
 
 	<!-- Services -->
-	<script src="/js/functions.js"></script>
+	<script src="../../js/stockFunctions.js"></script>
 	<!-- Directives -->
-	<script src="/js/directives.js"></script>
+	<script src="../../js/directives.js"></script>
 </head>
 <body>
-	<div ng-controller="mainCtrl">
+	<div ng-controller="stockCtrl">
 	<nav class="navbar navbar-inverse navbar-default">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -43,16 +45,16 @@ $userRow=mysqli_fetch_array($res);
 	        <span class="icon-bar"></span>
 	      </button>
 	      <a class="navbar-brand" href="#">
-	        <img width="70px" height="40px" alt="Westcombe MRP system" src="../Asets/westcombe_logo_small.png">
+	        <img width="70px" height="40px" alt="Westcombe MRP system" src="../../Asets/westcombe_logo_small.png">
 	      </a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li><a href="/views/index.php">Home</a></li>
-	        <li><a href="/views/orders.php">Orders</a></li>
-	        <li class="active"><a href="/views/stock.php">Stock</a></li>
+	        <li><a href="index.php">Home</a></li>
+	        <li><a href="orders.php">Orders</a></li>
+	        <li class="active"><a href="stock.php">Stock</a></li>
 	        <li><a href="#">Jobs</a></li>
 	        <li><a href="#">Metrics</a></li>
 	      </ul>
@@ -62,9 +64,9 @@ $userRow=mysqli_fetch_array($res);
 	              $username= $userRow['username'];
 	              require '../dbconnect.php';
 	              $res=mysqli_query($mysqli,"SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
-	              echo '<img id="profile_image" height="300" width="300" src="../Asets/photo.png">';
+	              echo '<img id="profile_image" height="300" width="300" src="../../Asets/photo.png">';
 	              ?>
-								<a href="../user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+								<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
 	          </div>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
@@ -77,7 +79,7 @@ $userRow=mysqli_fetch_array($res);
 	<div class="modal-content">
 			<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<img width="100px" height="40px" alt="Brand" src="../Asets/westcombe.png"><!-- Logo -->
+					<img width="100px" height="40px" alt="Brand" src="../../Asets/westcombe.png"><!-- Logo -->
 	</div>
 	<div class="modal-body">
 	<form class="form-inline" role="form">
@@ -259,10 +261,12 @@ $userRow=mysqli_fetch_array($res);
 </div>
 </div>
 <div class="col-md-2 col-xs-12">
-	<div class="input-group">
+	<form ng-submit="quickSearch(1)">
+		<div class="input-group">
 			<input id="qicksearch" type="text" class="form-control" ng-model="quicksearch" ng-init="quicksearch=''" value="" placeholder="Enter keyword">
 			<div style="cursor:pointer" ng-click="quickSearch(1)" class="input-group-addon"><i class="fa fa-search"></i></div>
 		</div>
+	</form>
 </div>
 <div class="col-md-4" id="action_buttons">
 	<button type="button" class="btn btn-primary" ng-click="loadStock(1)">Load stock</button>
@@ -327,9 +331,9 @@ $userRow=mysqli_fetch_array($res);
     </tbody>
   </table>
 	<div id="paginator_bottom" class="col-md-4 col-sm-6" ng-show="paginator_bottom">
-	<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="loadStock(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
+		<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="loadStock(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
 	</div>
-			<div loading></div>
+	<div loading></div>
 </body>
 <div class="alert alert-danger" ng-show="error" class="col-xs-12">
 		<strong>Error!</strong> No results found. Please try another query!

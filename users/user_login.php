@@ -4,7 +4,7 @@ include_once 'dbconnect.php';
 
 if(isset($_SESSION['user'])!="")
 {
-	header("Location: /views/index.php");
+	header("Location: /login.php");
 }
 
     $userEmail = $_POST['user'];
@@ -22,16 +22,20 @@ if(isset($_SESSION['user'])!="")
     if ($stmt->fetch())
     {
 			$_SESSION["user"] = $id;
-			if($privilige == 'super user') {
-				header("Location: /views/index.php");
+			$_SESSION["privilige"] = $privilige;
+			if($privilige == 'admin') {
+				header("Location: /users/admin/admin_page.php");
 			}
-			else if ($privilige == 'admin') {
-				header("Location: /views/admin_page.php");
+			else if ($privilige == 'super user') {
+				header("Location: /users/super_user/index.php");
+			}
+			else if ($privilige == 'user') {
+				header("Location: /users/user/main.php");
 			}
 
     }
 else
     {
-    header("location: /views/login_failed.html");
+    header("location: /users/login_failed.html");
     }
 ?>

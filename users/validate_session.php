@@ -4,7 +4,7 @@ include_once 'dbconnect.php';
 
 if(isset($_SESSION['user'])!="")
 {
-	header("Location: /views/index.php");
+	header("Location: /login.html");
 }
 
     $userEmail = $_POST['user'];
@@ -22,10 +22,10 @@ if(isset($_SESSION['user'])!="")
     if ($stmt->fetch())
     {
 			$_SESSION["user"] = $id;
-			header("Location: /views/index.php");
+			header("Location: /users/super_user/index.php");
     }
 else
     {
-    header("location: /views/access_denied.html");
+    header("location: /users/access_denied.html");
     }
     ?>

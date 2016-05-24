@@ -1,5 +1,5 @@
 <?php
-	include ("dbconnect.php");
+	include ("../dbconnect.php");
 
 	date_default_timezone_set("Europe/London");
 

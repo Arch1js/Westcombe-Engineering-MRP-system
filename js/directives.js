@@ -1,12 +1,12 @@
 app.directive("navbar", function () {
 	return {
 		restrict: "A",
-		templateUrl: "../views/nav-bar.php"
+		templateUrl: "/users/nav-bar.php"
 	}
 });
 app.directive("loading", function () {
 	return {
 		restrict: "A",
-		templateUrl: "../views/loading_spinner.html"
+		templateUrl: "/users/loading_spinner.html"
 	}
 });

@@ -5,7 +5,7 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
   $scope.data2 = [];
 
   $scope.loadStock = function(page) { //load all stock
-
+$scope.loading = true;
     if($scope.quicksearch !== "") {
       quickSearch(page);
     }
@@ -20,7 +20,7 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
       dataCount: incr,
       start: start
     };
-  	$scope.url = '/displayStock.php'; //post url
+  	$scope.url = '/users/super_user/displayStock.php'; //post url
   $http.post($scope.url, data).
       success(function(data,status) {
 
@@ -58,7 +58,7 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
              start: start,
              quick: $scope.quicksearch
        };
-         $scope.url = '/quickSearch.php';
+         $scope.url = '/users/super_user/quickSearch.php';
        $http.post($scope.url, data).
        success(function(data,status) {
 
@@ -81,7 +81,7 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
 
   }
   $scope.addRecord = function(i) { //add new stock item to database
-   $scope.url = '/addRecord.php';
+   $scope.url = '/users/super_user/addRecord.php';
           var data = {
             Finished_part_no: $scope.Finished_Part,
             Casting_Supplier_part_no: $scope.Casting_or_Supplier_Pt_No,
@@ -104,7 +104,7 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
 
   }
   $scope.updateRecord = function(record) { //update stock item on database
-    $scope.url = '/updateRecord.php';
+    $scope.url = '/users/super_user/updateRecord.php';
 
         var data = {
           Finished_part_no: $scope.record.Finished_Part,

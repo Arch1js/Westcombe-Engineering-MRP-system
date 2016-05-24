@@ -1,13 +1,13 @@
 <?php
 $data = file_get_contents("php://input");
-require 'dbconnect.php';
+require '../dbconnect.php';
 $objData = json_decode($data);
 
-$sql = "select * from stock LIMIT ?,?";
+$sql = "select * from administrators LIMIT ?,?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("ii", $objData->start,$objData->dataCount);
 
-$sql2 = "select count(*) as count from stock";
+$sql2 = "select count(*) as count from administrators";
 $stmt2 = $mysqli->prepare($sql2);
 
 $stmt->execute();
