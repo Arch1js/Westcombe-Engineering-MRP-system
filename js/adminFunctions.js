@@ -113,8 +113,6 @@ $http.post($scope.url, data);
           };
           $http.post($scope.url, data);
 
-      $scope.data.push(data);
-
       }
 }
 app.filter('start', function () { //splice search results for pagination
