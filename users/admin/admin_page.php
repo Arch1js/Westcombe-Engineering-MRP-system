@@ -75,11 +75,6 @@ $userRow=mysqli_fetch_array($res);
 	  </div><!-- /.container-fluid -->
 	</nav>
 	<div class="contents">
-		<div class="col-md-3">
-			<div id="clock">
-				<div id="chartdiv"></div>
-			</div>
-		</div>
 	</div>
 </body>
 </html>
