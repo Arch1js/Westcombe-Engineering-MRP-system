@@ -1,0 +1,34 @@
+body {  
+  background: #4B79A1; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #4B79A1 , #283E51); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #4B79A1 , #283E51); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.navbar-brand {
+padding: 5px 15px;
+}
+#profile_image
+{
+    height: 50px;
+    width: 50px;
+    border: 1px solid white;
+    border-radius: 30px;
+    margin-left: 10px;
+}
+#content {
+  color:white;
+}
+.ct-label{
+  font-size: 16em;
+}
+#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}
+#chartdiv a {
+  visibility: hidden;
+}
+#clock {
+  width: 100%;
+  height: 100%;
+}
