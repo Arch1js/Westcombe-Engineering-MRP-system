@@ -13,11 +13,11 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
   $scope.getNewestData = function() {
     $scope.loading = true;
     var date = new Date();
-    var weekday = date.getDay();
-    // var weekday = 1;
+    // var weekday = date.getDay();
+    var weekday = 1;
 
     if(weekday == 1) { //get data only on Mondays
-      $scope.url = '/users/super_user/writeOrders.php';
+      $scope.url = '/users/admin/writeOrders.php';
       $http.post($scope.url);
     }
     else {
@@ -25,6 +25,23 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
     }
     $scope.loading = false;
   }
+
+  $scope.openSelection = function(i) { //open selection in new modal window
+  		$scope.record = i;
+  }
+
+  $scope.updateOrder = function(record) { //update stock item on database
+    $scope.url = '/users/admin/updateOrder.php';
+
+        var data = {
+          id: $scope.record.id,
+          comment: $scope.record.Comment,
+          status: $scope.record.Status
+       };
+
+       $http.post($scope.url, data);
+  }
+
   $scope.loadData = function(page) {
     $scope.ordersWeek = true;
     $scope.refreshError = false;

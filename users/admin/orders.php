@@ -72,9 +72,76 @@ $userRow=mysqli_fetch_array($res);
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+	<!-- Edit Modal -->
+	<div class="modal fade" id="editModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+	<!-- Modal content-->
+	<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<img width="100px" height="40px" alt="Brand" src="../../Asets/westcombe.png"><!-- Logo -->
+	</div>
+	<div class="modal-body">
+	<form class="form-inline" role="form">
+		<div id="change_form" class="form-group">
+		<div class="col-md-4 col-sm-4">
+			<label>ID: </label>
+			<input type="text" class="form-control" maxlength="20" ng-model="record.id" disabled/>
+		</div>
+		<div class="col-md-4 col-sm-4">
+			<label>Supplier product code: </label>
+			<input type="text" class="form-control" maxlength="20" ng-model="record.Supplier_Product_Code" disabled/>
+		</div>
+			<div class="col-md-3 col-sm-3">
+			<label>Earliest Delivery Date: </label>
+			<input type="text" class="form-control" maxlength="5" ng-model="record.Earliest_Delivery_Date_Time" disabled/>
+		</div>
+		</div>
+	</form>
+	<form class="form-inline" role="form">
+		<div id="change_form" class="form-group">
+		<div class="col-md-4 col-sm-4">
+			<label>Order Quantity: </label>
+			<input type="text" class="form-control" maxlength="38" ng-model="record.Order_Quantity" disabled/>
+		</div>
+		<div class="col-md-4 col-sm-4">
+			<label>Consignee Code: </label>
+			<input type="text" class="form-control" maxlength="9" ng-model="record.Consignee_Code" disabled/>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<label>Order Line Status: </label>
+			<input type="text" class="form-control" maxlength="50" ng-model="record.Order_Line_Status" disabled/>
+		</div>
+		</div>
+	</form>
+	<form class="form-inline" role="form">
+		<div id="change_form" class="form-group">
+			<div class="col-md-7 col-sm-5">
+				<label>Comments (max lenght 120 char): </label>
+				<textarea type="text" class="form-control" maxlength="120" ng-model="record.Comment"rows="6" cols="40"></textarea>
+			</div>
+			<div class="col-md-4 col-sm-4">
+				<label>Status: </label>
+				<select class="form-control" ng-model="record.Status">
+					<option value="Active">Active</option>
+					<option value="Pending">Pending</option>
+					<option value="On-Hold">On-Hold</option>
+				</select>
+			</div>
+		</div>
+	</form>
+	</div>
+	<div class="modal-footer">
+	<button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updateOrder(record)">Save changes</button>
+		<button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
+	</div>
+</div>
+</div>
+</div>
 	<div class="col-md-3 col-sm-4" id="action_buttons">
 		<button type="button" class="btn btn-warning" ng-click="getNewestData()">Refresh Data</button>
 		<button type="button" class="btn btn-success" ng-click="loadData(1)">Load Data</button>
+		<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder">Edit</button>
 	</div>
 	<div class="col-md-1" ng-show="ordersWeek">
 		<p>Week of {{orderWeek}}</p>
@@ -102,6 +169,8 @@ $userRow=mysqli_fetch_array($res);
 		<th>Order Quantity</th>
 		<th>Consignee Code</th>
 		<th>Order Line Status</th>
+		<th>Status</th>
+		<th>Comment</th>
 	</tr>
 </thead>
 <tbody ng-show="table_body">
@@ -112,6 +181,9 @@ $userRow=mysqli_fetch_array($res);
 		<td>{{i.Order_Quantity}}</td>
 		<td>{{i.Consignee_Code}}</td>
 		<td>{{i.Order_Line_Status}}</td>
+		<td>{{i.Status}}</td>
+		<td>{{i.Comment}}</td>
+			<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editOrder"></i></td>
 	</tr>
 	</tbody>
 </table>
