@@ -100,6 +100,8 @@ $userRow=mysqli_fetch_array($res);
 		<th>Order Quantity</th>
 		<th>Consignee Code</th>
 		<th>Order Line Status</th>
+		<th>Status</th>
+		<th>Comment</th>
 	</tr>
 </thead>
 <tbody ng-show="table_body">
@@ -110,6 +112,8 @@ $userRow=mysqli_fetch_array($res);
 		<td>{{i.Order_Quantity}}</td>
 		<td>{{i.Consignee_Code}}</td>
 		<td>{{i.Order_Line_Status}}</td>
+		<td>{{i.Status}}</td>
+		<td>{{i.Comment}}</td>
 	</tr>
 	</tbody>
 </table>

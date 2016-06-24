@@ -5,7 +5,7 @@ function chartCtrl($scope, $http) { //main controller for stock page
   $scope.data = [];
   $scope.data2 = [];
 
-  $scope.url = '/users/admin/getChartData.php'; //post url
+  $scope.url = '/users/admin/admin_scripts/getChartData.php'; //post url
   $http.post($scope.url).
       success(function(data,status) {
               $scope.data = data[0]; //save returned data to array

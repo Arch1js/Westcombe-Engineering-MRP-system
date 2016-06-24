@@ -1,6 +1,6 @@
 <?php
 $data = file_get_contents("php://input");
-require '../dbconnect.php';
+require '../../dbconnect.php';
 $objData = json_decode($data);
 
 $password_hash = password_hash("$objData->password", PASSWORD_DEFAULT);

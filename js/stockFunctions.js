@@ -5,6 +5,7 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
   $scope.data2 = [];
 
   $scope.loadStock = function(page) { //load all stock
+    $scope.quicksearch = '';
 $scope.loading = true;
     if($scope.quicksearch !== "") {
       quickSearch(page);
@@ -20,7 +21,7 @@ $scope.loading = true;
       dataCount: incr,
       start: start
     };
-  	$scope.url = '/users/super_user/displayStock.php'; //post url
+  	$scope.url = '/users/scripts/displayStock.php'; //post url
   $http.post($scope.url, data).
       success(function(data,status) {
 
@@ -58,7 +59,7 @@ $scope.loading = true;
              start: start,
              quick: $scope.quicksearch
        };
-         $scope.url = '/users/super_user/quickSearch.php';
+         $scope.url = '/users/scripts/quickSearch.php';
        $http.post($scope.url, data).
        success(function(data,status) {
 
@@ -81,7 +82,7 @@ $scope.loading = true;
 
   }
   $scope.addRecord = function(i) { //add new stock item to database
-   $scope.url = '/users/super_user/addRecord.php';
+   $scope.url = '/users/scripts/addRecord.php';
           var data = {
             Finished_part_no: $scope.Finished_Part,
             Casting_Supplier_part_no: $scope.Casting_or_Supplier_Pt_No,
@@ -96,7 +97,9 @@ $scope.loading = true;
     				Finished_goods_stock: $scope.Finished_Goods_Stock,
     				Current_total_stock: $scope.Current_Total_Stock,
     				Additional_Info: $scope.Additional_Info,
-    				Description: $scope.Description
+    				Description: $scope.Description,
+            Trigger: $scope.record.AddTrigger_qty,
+            Replenish: $scope.record.AddReplenish_qty
       };
       $http.post($scope.url, data);
 
@@ -104,7 +107,7 @@ $scope.loading = true;
 
   }
   $scope.updateRecord = function(record) { //update stock item on database
-    $scope.url = '/users/super_user/updateRecord.php';
+    $scope.url = '/users/scripts/updateRecord.php';
 
         var data = {
           Finished_part_no: $scope.record.Finished_Part,
@@ -121,6 +124,8 @@ $scope.loading = true;
    				Current_total_stock: $scope.record.Current_Total_Stock,
    				Additional_Info: $scope.record.Additional_Info,
    				Description: $scope.record.Description,
+          Trigger: $scope.record.Trigger_qty,
+          Replenish: $scope.record.Replenish_qty,
           ID:$scope.record.ID
        };
 

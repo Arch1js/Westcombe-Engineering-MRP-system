@@ -55,7 +55,7 @@ function validate2() { //password validation for new user form
     $scope.user = i;
   }
 $scope.updateCredentials = function(user) {
-  $scope.url = '/users/admin/updateUser.php'; //post url
+  $scope.url = '/users/admin/admin_scripts/updateUser.php'; //post url
   var data = {
     userID: $scope.user.user_id,
     username: $scope.user.username,
@@ -66,7 +66,7 @@ $http.post($scope.url, data);
 }
 
 $scope.updatePassword = function(user) {
-  $scope.url = '/users/admin/updatePassword.php'; //post url
+  $scope.url = '/users/admin/admin_scripts/updatePassword.php'; //post url
   var data = {
     userID: $scope.user.user_id,
     password: $scope.user.newPassword
@@ -83,7 +83,7 @@ $http.post($scope.url, data);
       dataCount: incr,
       start: start
     };
-    $scope.url = '/users/admin/displayUsers.php'; //post url
+    $scope.url = '/users/admin/admin_scripts/displayUsers.php'; //post url
   $http.post($scope.url, data).
       success(function(data,status) {
 
@@ -98,7 +98,7 @@ $http.post($scope.url, data);
   }
 
   $scope.addUser = function() { //add new stock item to database
-     $scope.url = '/users/admin/addUser.php';
+     $scope.url = '/users/admin/admin_scripts/addUser.php';
         var data = {
           username: $scope.user.username,
           email: $scope.user.email,
@@ -109,7 +109,7 @@ $http.post($scope.url, data);
     }
 
     $scope.deleteUser = function() { //add new stock item to database
-       $scope.url = '/users/admin/deleteUser.php';
+       $scope.url = '/users/admin/admin_scripts/deleteUser.php';
           var data = {
             userID: $scope.user.user_id
           };

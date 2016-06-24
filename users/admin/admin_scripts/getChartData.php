@@ -1,6 +1,6 @@
 <?php
 $data = file_get_contents("php://input");
-require '../dbconnect.php';
+require '../../dbconnect.php';
 
 
 $sql = "SELECT 'Raw material' as Title, SUM(P_P_Cost_Raw * Raw_Material_Stock) AS Stock from stock";

@@ -148,6 +148,18 @@ $userRow=mysqli_fetch_array($res);
 	</form>
 	<form class="form-inline" role="form">
 		<div id="change_form" class="form-group">
+			<div class="col-md-4 col-sm-4">
+				<label>Trigger Qty: </label>
+				<input type="number" class="form-control" maxlength="5" ng-model="record.AddTrigger_qty"/>
+			</div>
+			<div class="col-md-4 col-sm-4">
+				<label>Replenish Qty: </label>
+				<input type="number" class="form-control" maxlength="5" ng-model="record.AddReplenish_qty"/>
+			</div>
+		</div>
+	</form>
+	<form class="form-inline" role="form">
+		<div id="change_form" class="form-group">
 			<div class="col-md-5 col-sm-5">
 				<label>Additional Info: </label>
 				<textarea type="text" class="form-control" maxlength="100" ng-model="Additional_Info"rows="6" cols="40"></textarea>
@@ -242,6 +254,18 @@ $userRow=mysqli_fetch_array($res);
 	</form>
 	<form class="form-inline" role="form">
 		<div id="change_form" class="form-group">
+			<div class="col-md-4 col-sm-4">
+				<label>Trigger Qty: </label>
+				<input type="number" class="form-control" maxlength="5" ng-model="record.Trigger_qty"/>
+			</div>
+			<div class="col-md-4 col-sm-4">
+				<label>Replenish Qty: </label>
+				<input type="number" class="form-control" maxlength="5" ng-model="record.Replenish_qty"/>
+			</div>
+		</div>
+	</form>
+	<form class="form-inline" role="form">
+		<div id="change_form" class="form-group">
 			<div class="col-md-5 col-sm-5">
 				<label>Additional Info: </label>
 				<textarea type="text" class="form-control" maxlength="100" ng-model="record.Additional_Info"rows="6" cols="40"></textarea>
@@ -306,7 +330,9 @@ $userRow=mysqli_fetch_array($res);
 				<th ng-click="sort('Finished_Goods_Stock')">Finished Goods Stock<span class="glyphicon sort-icon" ng-show="sortKey=='Finished_Goods_Stock'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 				<th ng-click="sort('Current_Total_Stock')">Current Total Stock<span class="glyphicon sort-icon" ng-show="sortKey=='Current_Total_Stock'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 				<th ng-click="sort('Supplier')">Supplier<span class="glyphicon sort-icon" ng-show="sortKey=='Supplier'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
-      </tr>
+				<th>Trigger Qty</th>
+				<th>Replenish Qty</th>
+			</tr>
     </thead>
     <tbody ng-show="table_body">
       <tr  ng-repeat="i in data | orderBy:sortKey:reverse | start: (currentPage - 1) * pageSizeInput | limitTo: pageSizeInput">
@@ -325,6 +351,8 @@ $userRow=mysqli_fetch_array($res);
 				<td>{{i.Finished_Goods_Stock}}</td>
 				<td>{{i.Current_Total_Stock}}</td>
 				<td>{{i.Supplier}}</td>
+				<td>{{i.Trigger_qty}}</td>
+				<td>{{i.Replenish_qty}}</td>
 				<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editrecord"></i></td>
 				<!-- <td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)"></i></td> -->
 			</tr>

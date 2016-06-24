@@ -16,10 +16,12 @@ Rejects_Scrap=?,
 Raw_Material_Stock=?,
 Finish_Goods_Stock=?,
 Current_Total_Stock=?,
-Supplier=?
+Supplier=?,
+Trigger_qty=?,
+Replenish_qty=?
 WHERE ID=?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("sssisssiiiiiisi", $objData->Casting_Supplier_part_no,
+$stmt->bind_param("sssisssiiiiiisiii", $objData->Casting_Supplier_part_no,
 $objData->Finished_part_no,
 $objData->Description,
 $objData->BOM,
@@ -33,6 +35,8 @@ $objData->Raw_Material_Stock,
 $objData->Finished_goods_stock,
 $objData->Current_total_stock,
 $objData->Supplier,
+$objData->Trigger,
+$objData->Replenish,
 $objData->ID);
 
 $stmt->execute();

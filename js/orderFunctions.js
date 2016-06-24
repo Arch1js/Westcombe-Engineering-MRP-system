@@ -17,7 +17,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
     var weekday = 1;
 
     if(weekday == 1) { //get data only on Mondays
-      $scope.url = '/users/admin/writeOrders.php';
+      $scope.url = '/users/scripts/writeOrders.php';
       $http.post($scope.url);
     }
     else {
@@ -31,7 +31,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
   }
 
   $scope.updateOrder = function(record) { //update stock item on database
-    $scope.url = '/users/admin/updateOrder.php';
+    $scope.url = '/users/scripts/updateOrder.php';
 
         var data = {
           id: $scope.record.id,
@@ -57,7 +57,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
              dataCount: incr,
              start: start
        };
-         $scope.url = '/users/super_user/getNewestData.php';
+         $scope.url = '/users/scripts/getNewestData.php';
        $http.post($scope.url, data).
        success(function(data,status) {
 

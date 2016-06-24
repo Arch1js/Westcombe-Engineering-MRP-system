@@ -183,7 +183,7 @@ $userRow=mysqli_fetch_array($res);
 		<td>{{i.Order_Line_Status}}</td>
 		<td>{{i.Status}}</td>
 		<td>{{i.Comment}}</td>
-			<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editOrder"></i></td>
+		<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editOrder"></i></td>
 	</tr>
 	</tbody>
 </table>
