@@ -6,10 +6,17 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
   $scope.dataCount = [];
   $scope.orderWeekArray = [];
 
+  $scope.paginator_bottom = true;
+
   $scope.sort = function(keyname){
         $scope.sortKey = keyname;   //set the sortKey to the param passed
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     }
+
+  $scope.printOrder = function() {
+    window.print();
+  }
+
   $scope.getNewestData = function() {
     $scope.loading = true;
     var date = new Date();
@@ -43,10 +50,10 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
   }
 
   $scope.loadData = function(page) {
-    $scope.ordersWeek = true;
+    $scope.ordersWeek = false;
     $scope.refreshError = false;
     $scope.dataQueryError = false;
-    $scope.paginator_bottom = false
+    $scope.paginator_bottom = true;
     $scope.table_body = false;
     $scope.loading = true;
     $scope.currentPage = page;
@@ -69,13 +76,13 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
 
                if($scope.dataCount[0].count == 0) { //if orders database is empty, display error message
                  $scope.dataQueryError = true;
-                 $scope.paginator_bottom = false;
+                 $scope.paginator_bottom = true;
                  $scope.loading = false;
                }
                else {
                $scope.loading = false;
                $scope.table_body = true;
-               $scope.paginator_bottom = true;
+               $scope.paginator_bottom = false;
                 }
        });
   }
