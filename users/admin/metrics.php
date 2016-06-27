@@ -61,7 +61,7 @@ $userRow=mysqli_fetch_array($res);
 					<li><a href="/users/admin/manageUsers.php">Users</a></li>
 	        <li><a href="/users/admin/orders.php">Orders</a></li>
 	        <li><a href="/users/admin/stock.php">Stock</a></li>
-	        <li><a href="#">Jobs</a></li>
+	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
 	        <li class="active"><a href="/users/admin/metrics.php">Metrics<span class="sr-only">(current)</span></a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">

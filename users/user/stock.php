@@ -81,7 +81,7 @@ $userRow=mysqli_fetch_array($res);
 	</form>
 </div>
 <div class="col-md-4" id="action_buttons">
-	<button type="button" class="btn btn-primary" ng-click="loadStock(1)">Load stock</button>
+	<button type="button" class="btn btn-primary" ng-click="loadStock(1)"><span class="fa fa-tasks"></span> Load stock</button>
 </div>
 	<div class="col-md-1 col-sm-5 col-xs-12" id="page_controller">
 		<select class="form-control" ng-model="pageSizeInput" ng-init="pageSizeInput='10'" ng-change="loadStock(currentPage)">

@@ -54,7 +54,7 @@ $userRow=mysqli_fetch_array($res);
 					<li class="active"><a href="/users/admin/manageUsers.php">Users<span class="sr-only">(current)</span></a></li>
 	        <li><a href="/users/admin/orders.php">Orders</a></li>
 	        <li><a href="/users/admin/stock.php">Stock</a></li>
-	        <li><a href="#">Jobs</a></li>
+	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
 	        <li><a href="/users/admin/metrics.php">Metrics</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
@@ -220,8 +220,8 @@ $userRow=mysqli_fetch_array($res);
 </div>
 </div>
 <div class="col-md-2" id="action_buttons">
-	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Add user</button>
-	<button type="button" class="btn btn-warning" ng-click="edituser = !edituser">Edit user</button>
+	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal"><span class="fa fa-plus"></span> Add user</button>
+	<button type="button" class="btn btn-warning" ng-click="edituser = !edituser"><span class="fa fa-pencil-square-o"></span> Edit user</button>
 </div>
 <div class="col-md-1" ng-show="ordersWeek">
 	<p>Week of {{orderWeek}}</p>

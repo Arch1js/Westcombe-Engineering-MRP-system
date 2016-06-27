@@ -56,7 +56,7 @@ $userRow=mysqli_fetch_array($res);
 					<li><a href="/users/admin/manageUsers.php">Users</a></li>
 	        <li><a href="/users/admin/orders.php">Orders</a></li>
 	        <li class="active"><a href="/users/admin/stock.php">Stock</a></li>
-	        <li><a href="#">Jobs</a></li>
+	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
 	        <li><a href="/users/admin/metrics.php">Metrics</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
@@ -186,7 +186,7 @@ $userRow=mysqli_fetch_array($res);
 	<div class="modal-content">
 			<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<img width="100px" height="40px" alt="Brand" src="../Asets/westcombe.png"><!-- Logo -->
+					<img width="100px" height="40px" alt="Brand" src="../../Asets/westcombe.png"><!-- Logo -->
 	</div>
 	<div class="modal-body">
 	<form class="form-inline" role="form">
@@ -294,9 +294,9 @@ $userRow=mysqli_fetch_array($res);
 	</form>
 </div>
 <div class="col-md-4" id="action_buttons">
-	<button type="button" class="btn btn-primary" ng-click="loadStock(1)">Load stock</button>
-	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Add new</button>
-	<button type="button" class="btn btn-warning" ng-click="editrecord = !editrecord">Edit</button>
+	<button type="button" class="btn btn-primary" ng-click="loadStock(1)"><span class="fa fa-tasks"></span> Load stock</button>
+	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal"><span class="fa fa-plus"></span> Add new</button>
+	<button type="button" class="btn btn-warning" ng-click="editrecord = !editrecord"><span class="fa fa-pencil-square-o"></span> Edit</button>
 </div>
 	<div class="col-md-1 col-sm-5 col-xs-12" id="page_controller">
 		<select class="form-control" ng-model="pageSizeInput" ng-init="pageSizeInput='10'" ng-change="loadStock(currentPage)">

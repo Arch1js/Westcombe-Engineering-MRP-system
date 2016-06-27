@@ -137,15 +137,16 @@ $userRow=mysqli_fetch_array($res);
 </div>
 </div>
 </div>
-	<div class="col-md-3 col-sm-4" id="action_buttons">
-		<button type="button" class="btn btn-warning" ng-click="getNewestData()">Refresh Data</button>
-		<button type="button" class="btn btn-success" ng-click="loadData(1)">Load Data</button>
-		<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder">Edit</button>
+	<div class="col-md-3 col-sm-4 no-print" id="action_buttons">
+		<button type="button" class="btn btn-warning" ng-click="getNewestData()"><span class="fa fa-refresh"></span> Refresh Data</button>
+		<button type="button" class="btn btn-success" ng-click="loadData(1)"><span class="fa fa-tasks"></span> Load Data</button>
+		<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder"><span class="fa fa-pencil-square-o"></span> Edit</button>
+		<button type="button" class="btn btn-primary"  ng-click="printOrder()"><span class="fa fa-print"></span> Print Orders</button>
 	</div>
-	<div class="col-md-1" ng-show="ordersWeek">
+	<div class="col-md-1 no-print" ng-show="ordersWeek">
 		<p>Week of {{orderWeek}}</p>
 	</div>
-	<div class="col-md-1 col-sm-5 col-xs-12" id="page_controller">
+	<div class="col-md-1 col-sm-5 col-xs-12 no-print" id="page_controller">
 		<select class="form-control" ng-model="pageSizeInput" ng-init="pageSizeInput='10'" ng-change="loadData(currentPage)">
 				<option value="10" selected>10</option>
 				<option value="25">25</option>
@@ -153,7 +154,7 @@ $userRow=mysqli_fetch_array($res);
 				<option value="100">100</option>
 		</select>
 	</div>
-	<div id="paginator_top" class="col-md-4 col-sm-6">
+	<div id="paginator_top" class="col-md-4 col-sm-6 no-print">
 		<div id="pageCounter">
 			<p>Page {{currentPage}} of {{numberOfItems/pageSizeInput | roundup}}</p>
 		</div>
@@ -186,7 +187,7 @@ $userRow=mysqli_fetch_array($res);
 	</tr>
 	</tbody>
 </table>
-<div id="paginator_bottom" class="col-md-4 col-sm-6" ng-show="paginator_bottom">
+<div id="paginator_bottom" class="col-md-4 col-sm-6 no-print" ng-show="paginator_bottom">
 	<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="loadData(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
 </div>
 <div loading></div>
