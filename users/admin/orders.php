@@ -144,8 +144,11 @@ $userRow=mysqli_fetch_array($res);
 		<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder"><span class="fa fa-pencil-square-o"></span> Edit</button>
 		<button type="button" class="btn btn-primary"  ng-click="printOrder()"><span class="fa fa-print"></span> Print Orders</button>
 	</div>
+
 	<div class="col-md-1 no-print" ng-hide="ordersWeek">
-		<p>Week of {{orderWeek}}</p>
+		<select id="week_selector" class="form-control" ng-model="orderWeek" ng-init="orderWeek='week'" ng-change="getOlderOrders()">
+			<option ng-repeat="i in orderWeekArray" value="{{i.week}}">{{i.week}}</option>
+		</select>
 	</div>
 	<div class="col-md-1 col-sm-5 col-xs-12 no-print" id="page_controller" ng-hide="perPage">
 		<select class="form-control" ng-model="pageSizeInput" ng-init="pageSizeInput='10'" ng-change="loadData(currentPage)">
@@ -167,6 +170,7 @@ $userRow=mysqli_fetch_array($res);
 		<th>ID</th>
 		<th>Supplier Product Code</th>
 		<th>Earliest Delivery Date/Time</th>
+		<th>Order Receive Date</th>
 		<th>Order Quantity</th>
 		<th>Consignee Code</th>
 		<th>Order Line Status</th>
@@ -179,6 +183,7 @@ $userRow=mysqli_fetch_array($res);
 		<td>{{i.id}}</td>
 		<td>{{i.Supplier_Product_Code}}</td>
 		<td>{{i.Earliest_Delivery_Date_Time}}</td>
+		<td>{{i.Order_Receive_Date}}</td>
 		<td>{{i.Order_Quantity}}</td>
 		<td>{{i.Consignee_Code}}</td>
 		<td>{{i.Order_Line_Status}}</td>
@@ -197,6 +202,9 @@ $userRow=mysqli_fetch_array($res);
 	</div>
 	<div class="alert alert-danger" ng-show="refreshError" class="col-xs-12">
 		<strong>Error!</strong> Order data is up to date!
+	</div>
+	<div class="alert alert-success" ng-show="refreshSuccess" class="col-xs-12">
+		<strong>Success!</strong> Database is up to date!
 	</div>
 </body>
 </html>

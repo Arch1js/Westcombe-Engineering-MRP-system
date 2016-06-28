@@ -6,20 +6,30 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
 
   $scope.loadStock = function(page) { //load all stock
     $scope.quicksearch = '';
-$scope.loading = true;
+    $scope.loading = true;
+
     if($scope.quicksearch !== "") {
       quickSearch(page);
     }
     else {
+      $scope.error = false;
       $scope.table_body = true;
       $scope.loading = true;
       $scope.paginator_bottom = false;
       $scope.currentPage = page;
-      var incr = $scope.pageSizeInput * $scope.currentPage;
+
+      if($scope.pageSizeInput == null) {
+        $scope.pageSizeInput = 10;
+        var incr = $scope.pageSizeInput * $scope.currentPage;
+      }
+      else {
+        var incr = $scope.pageSizeInput * $scope.currentPage;
+      }
+
       var start = 0;
-    var data = {
-      dataCount: incr,
-      start: start
+      var data = {
+        dataCount: incr,
+        start: start
     };
   	$scope.url = '/users/scripts/displayStock.php'; //post url
   $http.post($scope.url, data).
@@ -35,6 +45,9 @@ $scope.loading = true;
     }
 
   }
+
+  $scope.loadStock(1); //run function on page load
+
   $scope.openSelection = function(i) { //open selection in new modal window
   		$scope.record = i;
   }
@@ -48,9 +61,9 @@ $scope.loading = true;
   			$scope.reverse = !$scope.reverse; //if true make it false and vice versa
   	}
   $scope.quickSearch = function(page) { //Quick search function
+    $scope.table_body = false;
     $scope.error = false;
     $scope.loading = true;
-    $scope.table_body = false;
     $scope.currentPage = page;
     var incr = $scope.pageSizeInput * $scope.currentPage;
     var start = 0;

@@ -5,6 +5,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
   $scope.data = [];
   $scope.dataCount = [];
   $scope.orderWeekArray = [];
+  $scope.orderWeek = '';
 
   $scope.paginator_bottom = true;
 
@@ -18,6 +19,9 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
   }
 
   $scope.getNewestData = function() {
+    $scope.table_body = false;
+    $scope.ordersWeek = false;
+    $scope.paginator_bottom = true;
     $scope.loading = true;
     var date = new Date();
     // var weekday = date.getDay();
@@ -25,7 +29,10 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
 
     if(weekday == 1) { //get data only on Mondays
       $scope.url = '/users/scripts/writeOrders.php';
-      $http.post($scope.url);
+      $http.post($scope.url).
+      success(function() {
+        $scope.refreshSuccess = true;
+      });
     }
     else {
       $scope.refreshError = true;
@@ -51,6 +58,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
 
   $scope.loadData = function(page) {
     $scope.ordersWeek = false;
+    $scope.refreshSuccess = false;
     $scope.refreshError = false;
     $scope.dataQueryError = false;
     $scope.paginator_bottom = true;
@@ -58,11 +66,26 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
     $scope.loading = true;
     $scope.currentPage = page;
 
-    var incr = $scope.pageSizeInput * $scope.currentPage;
+    if($scope.pageSizeInput == null) {
+      $scope.pageSizeInput = 10;
+      var incr = $scope.pageSizeInput * $scope.currentPage;
+    }
+    else {
+      var incr = $scope.pageSizeInput * $scope.currentPage;
+    }
+
+    // if($scope.orderWeek == '') {
+    //   var date = 'empty';
+    // }
+    // else {
+      var date = $scope.orderWeek;
+      console.log(date);
+    // }
     var start = 0;
            var data = {
              dataCount: incr,
-             start: start
+             start: start,
+             date: date
        };
          $scope.url = '/users/scripts/getNewestData.php';
        $http.post($scope.url, data).
@@ -71,8 +94,8 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
                $scope.data= data[0]; //save returned data to array
                $scope.dataCount= data[1];//save number of returned data to array
                $scope.numberOfItems = $scope.dataCount[0].count;
-               $scope.orderWeekArray= data[2];
-               $scope.orderWeek = $scope.orderWeekArray[0].week;
+              //  $scope.orderWeekArray= data[2];
+              //  $scope.orderWeek = $scope.orderWeekArray[0].week;
 
                if($scope.dataCount[0].count == 0) { //if orders database is empty, display error message
                  $scope.dataQueryError = true;
@@ -86,6 +109,49 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
                 }
        });
   }
+
+  $scope.getPreviousOrders = function() {
+    $scope.url = '/users/scripts/getPreviousOrders.php';
+    $http.post($scope.url).
+      success(function(data, status) {
+        $scope.orderWeekArray= data[0];
+        $scope.orderWeek = $scope.orderWeekArray[0].week;
+
+        $scope.loadData(1);
+      })
+  }
+
+  $scope.getPreviousOrders();
+
+  $scope.getOlderOrders = function() {
+    $scope.loadData(1);
+    $scope.table_body = false;
+    $scope.loading = true;
+
+    var incr = $scope.pageSizeInput * $scope.currentPage;
+    var start = 0;
+
+    var data = {
+      dataCount: incr,
+      start: start,
+      date: $scope.orderWeek
+   };
+
+    $scope.url = '/users/scripts/getOlderOrders.php';
+    $http.post($scope.url, data).
+    success(function(data, status) {
+      $scope.data= data[0]; //save returned data to array
+      $scope.dataCount= data[1];//save number of returned data to array
+      $scope.numberOfItems = $scope.dataCount[0].count;
+
+      $scope.table_body = true;
+      $scope.loading = false;
+
+    });
+  }
+
+  // $scope.loadData(1);
+
 
 }
 app.filter('start', function () { //splice search results for pagination

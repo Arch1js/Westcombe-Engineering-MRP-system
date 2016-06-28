@@ -50,7 +50,14 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
     $scope.loading = true;
 
     $scope.currentPage = page;
-    var incr = $scope.pageSizeInput * $scope.currentPage;
+    if($scope.pageSizeInput == null) {
+      $scope.pageSizeInput = 10;
+      var incr = $scope.pageSizeInput * $scope.currentPage;
+    }
+    else {
+      var incr = $scope.pageSizeInput * $scope.currentPage;
+    }
+
     var start = 0;
 
     var data = {
@@ -77,6 +84,8 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
 
       });
     }
+
+    $scope.getMakelist(1); //run function on page load
 }
 app.filter('start', function () { //splice search results for pagination
     return function (input, start) {

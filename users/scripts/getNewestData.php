@@ -3,18 +3,30 @@
 	// include('writeOrders.php');
 	$data = file_get_contents("php://input");
 	$objData = json_decode($data);
+	// $date = '2016-06-13';
+// if ($objData->date == null) {
+	// $sql = "SELECT * FROM orders WHERE Order_Receive_Date IN (SELECT MAX(Order_Receive_Date) FROM orders) LIMIT ?,?";
+	// $stmt = $mysqli->prepare($sql);
+	// $stmt->bind_param("ii", $objData->start,$objData->dataCount);
+	//
+	// // max(Order_Receive_Date) as Order_Receive_Date,
+	// $sql2 = "SELECT count(*) as count FROM orders WHERE Order_Receive_Date IN (SELECT MAX(Order_Receive_Date) FROM orders)";
+	// $stmt2 = $mysqli->prepare($sql2);
+// }
+// else {
+	$sql = "SELECT * FROM orders WHERE  Order_Receive_Date=? LIMIT ?,?";
+	$stmt = $mysqli->prepare($sql);
+	$stmt->bind_param("sii", $objData->date, $objData->start,$objData->dataCount);
+
+	// max(Order_Receive_Date) as Order_Receive_Date,
+	$sql2 = "SELECT count(*) as count FROM orders WHERE Order_Receive_Date=?";
+	$stmt2 = $mysqli->prepare($sql2);
+	$stmt2->bind_param("s", $objData->date);
+// }
 
 
-$sql = "select * from orders LIMIT ?,?";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("ii", $objData->start,$objData->dataCount);
-
-
-$sql2 = "select count(*) as count from orders";
-$stmt2 = $mysqli->prepare($sql2);
-
-$sql3 = "select Order_Receive_Date as week from orders LIMIT 1";
-$stmt3 = $mysqli->prepare($sql3);
+// $sql3 = "SELECT DISTINCT Order_Receive_Date as week FROM orders ORDER BY Order_Receive_Date DESC";
+// $stmt3 = $mysqli->prepare($sql3);
 
 $stmt->execute();
 $result = $stmt->get_result();
@@ -32,15 +44,15 @@ while ($row2 = mysqli_fetch_array($result2)) {
   $data2[] = $row2;
 }
 
-$stmt3->execute();
-$result3 = $stmt3->get_result();
-$data3 = array();
+// $stmt3->execute();
+// $result3 = $stmt3->get_result();
+// $data3 = array();
+//
+// while ($row3 = mysqli_fetch_array($result3)) {
+//   $data3[] = $row3;
+// }
 
-while ($row3 = mysqli_fetch_array($result3)) {
-  $data3[] = $row3;
-}
-
-echo json_encode(array($data,$data2,$data3));
+echo json_encode(array($data,$data2));
 $stmt->close();
 
 ?>

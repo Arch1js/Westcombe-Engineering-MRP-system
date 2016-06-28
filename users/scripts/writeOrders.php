@@ -7,31 +7,34 @@
 	// $todaysDate = "$currentDate[mday]-0$currentDate[mon]-$currentDate[year]"; //gets current date with added formating
 	// $todaysDate_replaced = str_replace('/', '-', $todaysDate); //change the date format suitable for database
 	// $todaysDateFormated = date("Y-m-d", strtotime($todaysDate_replaced));
-	// 
+	//
 	// $todaysDateFormated = '2016-06-13'; // manual date for testing purposes
 	// $todaysDate = '13-06-2016';
 
-	$todaysDateFormated = '2016-06-20'; //same
-	$todaysDate = '20-06-2016';
+	// $todaysDateFormated = '2016-06-20'; //same
+	// $todaysDate = '20-06-2016';
 
-	$sql = "SELECT Order_Receive_Date FROM orders LIMIT 1";
-	$stmt = $mysqli->prepare($sql);
-	$stmt->execute();
+	$todaysDateFormated = '2016-06-27'; // manual date for testing purposes
+	$todaysDate = '27-06-2016';
 
-	$result = $stmt->get_result();
-	$data = array();
-
-	while ($row = mysqli_fetch_array($result)) {
-		$orderDate = $row['Order_Receive_Date'];
-	}
-
-	if($orderDate == $todaysDateFormated) { //if todays date is the same as date in orders table
-		return; //do nothing
-	}
-	else { //write new orders data to database
-		$sql2 = "DELETE FROM orders";
-		$stmt2 = $mysqli->prepare($sql2);
-		$stmt2->execute();
+	// $sql = "SELECT Order_Receive_Date FROM orders LIMIT 1";
+	// $stmt = $mysqli->prepare($sql);
+	// $stmt->execute();
+	//
+	// $result = $stmt->get_result();
+	// $data = array();
+	//
+	// while ($row = mysqli_fetch_array($result)) {
+	// 	$orderDate = $row['Order_Receive_Date'];
+	// }
+	//
+	// if($orderDate == $todaysDateFormated) { //if todays date is the same as date in orders table
+	// 	return; //do nothing
+	// }
+	// else { //write new orders data to database
+	// 	$sql2 = "DELETE FROM orders";
+	// 	$stmt2 = $mysqli->prepare($sql2);
+	// 	$stmt2->execute();
 			// $file_location = "https://drive.google.com/uc?export=download&id=0B-KUtsSOioNecTZCNFdSRElIV1U"; //location of the orders file using google drive for hosting
 			$file_location = "C:\\Users\\Arturs\\Desktop\\$todaysDate.csv"; //location of the orders file
 
@@ -58,6 +61,6 @@
 				$stmt->execute();
 		}
 
-	}
+	// }
 
 ?>
