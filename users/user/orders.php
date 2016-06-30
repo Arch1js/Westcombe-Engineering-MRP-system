@@ -44,7 +44,7 @@ $userRow=mysqli_fetch_array($res);
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#">
-					<img width="70px" height="40px" alt="Westcombe MRP system" src="../../Asets/westcombe_logo_small.png">
+					<img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
 				</a>
 			</div>
 
@@ -63,7 +63,7 @@ $userRow=mysqli_fetch_array($res);
 								$username= $userRow['username'];
 								require '../dbconnect.php';
 								$res=mysqli_query($mysqli,"SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
-								echo '<img id="profile_image" height="300" width="300" src="../../Asets/photo.png">';
+								echo '<img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">';
 								?>
 								<a href="../user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
 						</div>

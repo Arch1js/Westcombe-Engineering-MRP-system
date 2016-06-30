@@ -44,7 +44,7 @@ $userRow=mysqli_fetch_array($res);
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#">
-					<img width="70px" height="40px" alt="Westcombe MRP system" src="../../Asets/westcombe_logo_small.png">
+					<img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
 				</a>
 			</div>
 
@@ -63,7 +63,7 @@ $userRow=mysqli_fetch_array($res);
 								$username= $userRow['username'];
 								require '../dbconnect.php';
 								$res=mysqli_query($mysqli,"SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
-								echo '<img id="profile_image" height="300" width="300" src="../../Asets/photo.png">';
+								echo '<img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">';
 								?>
 								<a href="../user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
 						</div>
@@ -78,7 +78,7 @@ $userRow=mysqli_fetch_array($res);
 	<div class="modal-content">
 			<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<img width="100px" height="40px" alt="Brand" src="../../Asets/westcombe.png"><!-- Logo -->
+					<img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
 	</div>
 	<div class="modal-body">
 	<form class="form-inline" role="form">
@@ -137,7 +137,7 @@ $userRow=mysqli_fetch_array($res);
 </div>
 </div>
 </div>
-	<div class="col-md-3 col-sm-4 no-print" id="action_buttons">
+	<div class="col-md-5 col-sm-4 no-print" id="action_buttons">
 		<button type="button" class="btn btn-warning" ng-click="getNewestData()"><span class="fa fa-refresh"></span> Refresh Data</button>
 		<button type="button" class="btn btn-success" ng-click="loadData(1)"><span class="fa fa-tasks"></span> Load Data</button>
 		<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder"><span class="fa fa-pencil-square-o"></span> Edit</button>
