@@ -156,6 +156,11 @@ $userRow=mysqli_fetch_array($res);
 		<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder"><span class="fa fa-pencil-square-o"></span> Edit</button>
 		<button type="button" class="btn btn-primary"  ng-click="printMakelist()"><span class="fa fa-print"></span> Print Jobs</button>
 	</div>
+	<div class="col-md-1 no-print" ng-hide="ordersWeek">
+		<select id="week_selector" class="form-control" ng-model="orderWeek" ng-init="orderWeek='week'" ng-change="getOlderOrders()">
+			<option ng-repeat="i in orderWeekArray" value="{{i.week}}">{{i.week}}</option>
+		</select>
+	</div>
 	<div class="col-md-1 col-sm-5 col-xs-12 no-print" id="page_controller" ng-hide="perPage">
 		<select class="form-control" ng-model="pageSizeInput" ng-init="pageSizeInput='10'" ng-change="getMakelist(currentPage)">
 				<option value="10" selected>10</option>

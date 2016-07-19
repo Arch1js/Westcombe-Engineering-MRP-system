@@ -26,6 +26,19 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
     $http.post($scope.url, data);
   }
 
+  $scope.getPreviousMakelists = function() {
+    $scope.url = '/users/scripts/getPreviousMakelists.php';
+    $http.post($scope.url).
+      success(function(data, status) {
+        $scope.orderWeekArray= data[0];
+        $scope.orderWeek = $scope.orderWeekArray[0].week;
+
+        $scope.loadData(1);
+      })
+  }
+
+  $scope.getPreviousMakelists();
+
   $scope.getNewMakelistData = function() {
     $scope.dataRefreshSuccess = false;
     $scope.nodataError = false;

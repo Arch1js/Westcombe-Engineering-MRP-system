@@ -2,7 +2,7 @@
 include ("../dbconnect.php"); //db connection
 
 //get the necessary info from orders table
-$sql = "SELECT id, Consignee_Code, Earliest_Delivery_Date_Time, Supplier_Product_Code, Order_Quantity FROM orders";
+$sql = "SELECT id, Consignee_Code, Earliest_Delivery_Date_Time, Supplier_Product_Code, Order_Quantity FROM orders WHERE Order_Receive_Date in (SELECT MAX(Order_Receive_Date) from orders);";
 $stmt = $mysqli->prepare($sql); //prepare sql
 
 $stmt->execute(); //execute statement
@@ -38,17 +38,25 @@ foreach ($data as $data) { //foreach in orders array
 
 		if($orderQty >= $stockQty) {
 
-			$reqQty = -$stockQty - $orderQty; //get the quantity needed to cover order
+			$reqQty = abs($stockQty - $orderQty); //get the quantity needed to cover order
 			$status = 'Active'; //sett all makelist items to Active
 
 			if($stockQty == '') {
 				$stockQty = 0;
 			}
 
-			$sql3="INSERT INTO makelist (orderID, part_no, description, customer, delivery_date, stock, order_qty, req_qty, status)
-			VALUES(?,?,?,?,?,?,?,?,?)";
+      date_default_timezone_set("Europe/London");
+
+    	$currentDate=getdate();
+      
+      $todaysDate = "$currentDate[mday]-0$currentDate[mon]-$currentDate[year]"; //gets current date with added formating
+      $todaysDate_replaced = str_replace('/', '-', $todaysDate); //change the date format suitable for database
+      $todaysDateFormated = date("Y-m-d", strtotime($todaysDate_replaced));
+
+			$sql3="INSERT INTO makelist (orderID, part_no, description, customer, delivery_date, stock, order_qty, req_qty, status, makelist_creation_date)
+			VALUES(?,?,?,?,?,?,?,?,?,?)";
 			$stmt3 = $mysqli->prepare($sql3);
-			$stmt3->bind_param("issssiiis", $orderID, $partNo, $description, $customer, $delivery_date, $stockQty, $orderQty, $reqQty, $status);
+			$stmt3->bind_param("issssiiiss", $orderID, $partNo, $description, $customer, $delivery_date, $stockQty, $orderQty, $reqQty, $status, $todaysDateFormated);
 
 			$stmt3->execute();
 			$stmt3->close();
@@ -56,14 +64,14 @@ foreach ($data as $data) { //foreach in orders array
 			// echo ' (We dont have enough in stock, so wee need to make more)';
 			// echo '<br>';
 		}
-		else if ($orderQty < $stockQty){
-		// 	echo '(We have enough in stock to cover order)';
+		// else if ($orderQty < $stockQty){
+		// // 	echo '(We have enough in stock to cover order)';
+		// // 	echo '<br>';
+		// }
+		// else {
+		// 	echo 'error';
 		// 	echo '<br>';
-		}
-		else {
-			echo 'error';
-			echo '<br>';
-		}
+		// }
 	}
 }
 
