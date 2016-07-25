@@ -7,6 +7,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
   $scope.orderWeekArray = [];
   $scope.orderWeek = '';
 
+
   $scope.paginator_bottom = true;
 
   $scope.sort = function(keyname){
@@ -14,7 +15,20 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     }
 
-  $scope.printOrder = function() {
+  $scope.setStatusColor = function (i) {
+    if (i.Status == "Active") {
+      return "btn-success";
+    }
+    else if(i.Status == "Pending") {
+      return "btn-warning";
+    }
+    else {
+      return "btn-danger";
+    }
+
+  }
+
+  $scope.printOrder = function() { //print orders
     window.print();
   }
 

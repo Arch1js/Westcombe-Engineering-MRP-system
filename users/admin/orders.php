@@ -164,12 +164,13 @@ $userRow=mysqli_fetch_array($res);
 		</div>
 		<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="loadData(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
 	</div>
+<div class="table-responsive">
 <table class="table table-striped">
 	<thead>
 		<tr>
 		<th>ID</th>
-		<th>Supplier Product Code</th>
-		<th>Earliest Delivery Date/Time</th>
+		<th ng-click="sort('Supplier_Product_Code')">Supplier Product Code <span class="glyphicon sort-icon" ng-show="sortKey=='Supplier_Product_Code'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+		<th ng-click="sort('Earliest_Delivery_Date_Time')">Earliest Delivery Date/Time<span class="glyphicon sort-icon" ng-show="sortKey=='Earliest_Delivery_Date_Time'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 		<th>Order Receive Date</th>
 		<th>Order Quantity</th>
 		<th>Consignee Code</th>
@@ -179,7 +180,7 @@ $userRow=mysqli_fetch_array($res);
 	</tr>
 </thead>
 <tbody ng-show="table_body">
-	<tr ng-repeat="i in data | start: (currentPage - 1) * pageSizeInput | limitTo: pageSizeInput">
+	<tr ng-repeat="i in data | orderBy:sortKey:reverse | start: (currentPage - 1) * pageSizeInput | limitTo: pageSizeInput">
 		<td>{{i.id}}</td>
 		<td>{{i.Supplier_Product_Code}}</td>
 		<td>{{i.Earliest_Delivery_Date_Time}}</td>
@@ -187,12 +188,13 @@ $userRow=mysqli_fetch_array($res);
 		<td>{{i.Order_Quantity}}</td>
 		<td>{{i.Consignee_Code}}</td>
 		<td>{{i.Order_Line_Status}}</td>
-		<td>{{i.Status}}</td>
+		<td><button ng-class="setStatusColor(i)" class="btn btn-sm">{{i.Status}}</button></td>
 		<td>{{i.Comment}}</td>
 		<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editOrder"></i></td>
 	</tr>
 	</tbody>
 </table>
+</div>
 <div id="paginator_bottom" class="col-md-4 col-sm-6 no-print" ng-hide="paginator_bottom">
 	<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="loadData(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
 </div>

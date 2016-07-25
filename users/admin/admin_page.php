@@ -20,9 +20,6 @@ $userRow=mysqli_fetch_array($res);
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.css">
 	<link rel="stylesheet" href="../../css/home_style.css" type="text/css" /><!--Stylesheet -->
 
-	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-	<script src="https://www.amcharts.com/lib/3/gauge.js"></script>
-	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.29/angular.js"></script><!-- AngularJS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls.min.js"></script><!-- Bootstrap UI -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script><!-- JQuery -->
@@ -78,7 +75,6 @@ $userRow=mysqli_fetch_array($res);
 		<div class="container">
   <div class="content">
     <canvas id="universe"></canvas>
-    <div id="footerContent"><a href="https://twitter.com/Everlier">///</a></div>
     <div id="footer">
       <svg id="scene" x="0px" y="0px" width="1600px" height="315px">
         <path id="ground" d="M0,316.4209c0,0,157.7119-35.416,469-56c7.3833-0.4883,23.7876-3.5488,31.3335-4.0166

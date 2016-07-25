@@ -35,7 +35,7 @@ table {
 }
 #paginator_bottom {
   float:right;
-  display: inline-block;
+  display: block;
 }
 .pagination {
 	margin: 5px 0px;
@@ -47,4 +47,10 @@ table {
 #action_buttons {
   display: inline-block;
   margin-left: 5px;
+}
+.table-responsive {
+  display: inline;
+}
+.active_added {
+  color: green;
 }
