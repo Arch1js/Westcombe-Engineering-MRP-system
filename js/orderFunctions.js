@@ -33,25 +33,28 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
   }
 
   $scope.getNewestData = function() {
+    $scope.loading = true;
     $scope.table_body = false;
     $scope.ordersWeek = false;
     $scope.paginator_bottom = true;
-    $scope.loading = true;
+
     var date = new Date();
-    // var weekday = date.getDay();
+    // var weekday = date.getDay(); //get current weekday
     var weekday = 1;
 
     if(weekday == 1) { //get data only on Mondays
       $scope.url = '/users/scripts/writeOrders.php';
       $http.post($scope.url).
       success(function() {
+        $scope.loading = false;
         $scope.refreshSuccess = true;
       });
     }
     else {
+      $scope.loading = false;
       $scope.refreshError = true;
     }
-    $scope.loading = false;
+
   }
 
   $scope.openSelection = function(i) { //open selection in new modal window

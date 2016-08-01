@@ -14,7 +14,7 @@ $userRow=mysqli_fetch_array($res);
 ?>
 <html ng-app="WEapp">
 <head>
-  <title>Welcome - <?php echo $userRow['username'];?></title>
+  <title>Makelist - <?php echo $userRow['username'];?></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"><!-- Bootstrap CSS -->
@@ -57,6 +57,7 @@ $userRow=mysqli_fetch_array($res);
 					<li><a href="/users/admin/stock.php">Stock</a></li>
 					<li class="active"><a href="/users/admin/makelist.php">Makelist</a></li>
 					<li><a href="/users/admin/metrics.php">Metrics</a></li>
+					<li><a href="#">Purchase list</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<div id="content">
@@ -152,12 +153,12 @@ $userRow=mysqli_fetch_array($res);
 </div>
 	<div class="col-md-4 col-sm-4 no-print" id="action_buttons" ng-hide="action_buttons">
 		<button type="button" class="btn btn-warning" ng-click="getNewMakelistData()"><span class="fa fa-refresh"></span> Get Data</button>
-		<button type="button" class="btn btn-success" ng-click="getMakelist(1)"><span class="fa fa-tasks"></span> Load Data</button>
+		<button type="button" class="btn btn-success" ng-click="getPreviousMakelists()"><span class="fa fa-tasks"></span> Load Data</button>
 		<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder"><span class="fa fa-pencil-square-o"></span> Edit</button>
 		<button type="button" class="btn btn-primary"  ng-click="printMakelist()"><span class="fa fa-print"></span> Print Jobs</button>
 	</div>
 	<div class="col-md-1 no-print" ng-hide="ordersWeek">
-		<select id="week_selector" class="form-control" ng-model="orderWeek" ng-init="orderWeek='week'" ng-change="getOlderOrders()">
+		<select id="week_selector" class="form-control" ng-model="makelistWeek" ng-init="orderWeek='week'" ng-change="getMakelist(currentPage)">
 			<option ng-repeat="i in orderWeekArray" value="{{i.week}}">{{i.week}}</option>
 		</select>
 	</div>
@@ -186,6 +187,8 @@ $userRow=mysqli_fetch_array($res);
 		<th>Stock</th>
 		<th>Order qty</th>
 		<th>Required qty</th>
+		<th>Trigger qty</th>
+		<th>Replenish qty</th>
 		<th>Status</th>
 		<th>Comments</th>
 	</tr>
@@ -200,7 +203,9 @@ $userRow=mysqli_fetch_array($res);
 		<td>{{i.stock}}</td>
 		<td>{{i.order_qty}}</td>
 		<td>{{i.req_qty}}</td>
-		<td>{{i.status}}</td>
+		<td>{{i.trigger_qty}}</td>
+		<td>{{i.replenish_qty}}</td>
+		<td><button ng-class="setStatusColor(i)" class="btn btn-sm">{{i.status}}</button></td>
 		<td>{{i.comments}}</td>
 		<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editOrder"></i></td>
 	</tr>

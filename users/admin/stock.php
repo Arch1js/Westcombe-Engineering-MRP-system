@@ -14,7 +14,7 @@ $userRow=mysqli_fetch_array($res);
 ?>
 <html ng-app="WEapp">
 <head>
-  <title>Welcome - <?php echo $userRow['username'];?></title>
+  <title>Stock - <?php echo $userRow['username'];?></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"><!-- Bootstrap CSS -->
@@ -58,6 +58,7 @@ $userRow=mysqli_fetch_array($res);
 	        <li class="active"><a href="/users/admin/stock.php">Stock</a></li>
 	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
 	        <li><a href="/users/admin/metrics.php">Metrics</a></li>
+					<li><a href="#">Purchase list</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <div id="content">
@@ -139,7 +140,7 @@ $userRow=mysqli_fetch_array($res);
 			</div>
 			<div class="col-md-4 col-sm-4">
 				<label>Finished goods stock: </label>
-				<input type="text" class="form-control" maxlength="6" ng-model="Finished_Goods_Stock"/>
+				<input type="text" class="form-control" maxlength="6" ng-model="Finish_Goods_Stock"/>
 			</div>
 			<div class="col-md-4 col-sm-3">
 				<label>Current total stock: </label>
@@ -150,12 +151,28 @@ $userRow=mysqli_fetch_array($res);
 	<form class="form-inline" role="form">
 		<div id="change_form" class="form-group">
 			<div class="col-md-4 col-sm-4">
+				<label>Qty ready for use: </label>
+				<input type="text" class="form-control" maxlength="5" ng-model="Qty_ready_for_use"/>
+			</div>
+			<div class="col-md-4 col-sm-4">
+				<label>Qty Work In Progress: </label>
+				<input type="text" class="form-control" maxlength="5" ng-model="Qty_WIP"/>
+			</div>
+			<div class="col-md-4 col-sm-3">
+				<label>Days to deliver: </label>
+				<input type="text" class="form-control" maxlength="5" ng-model="Days_to_deliver"/>
+			</div>
+		</div>
+	</form>
+	<form class="form-inline" role="form">
+		<div id="change_form" class="form-group">
+			<div class="col-md-4 col-sm-4">
 				<label>Trigger Qty: </label>
-				<input type="number" class="form-control" maxlength="5" ng-model="record.AddTrigger_qty"/>
+				<input type="number" class="form-control" maxlength="5" ng-model="AddTrigger_qty"/>
 			</div>
 			<div class="col-md-4 col-sm-4">
 				<label>Replenish Qty: </label>
-				<input type="number" class="form-control" maxlength="5" ng-model="record.AddReplenish_qty"/>
+				<input type="number" class="form-control" maxlength="5" ng-model="AddReplenish_qty"/>
 			</div>
 		</div>
 	</form>
@@ -245,11 +262,27 @@ $userRow=mysqli_fetch_array($res);
 			</div>
 			<div class="col-md-4 col-sm-4">
 				<label>Finished goods stock: </label>
-				<input type="text" class="form-control" maxlength="6" ng-model="record.Finished_Goods_Stock"/>
+				<input type="text" class="form-control" maxlength="6" ng-model="record.Finish_Goods_Stock"/>
 			</div>
 			<div class="col-md-4 col-sm-3">
 				<label>Current total stock: </label>
 				<input type="text" class="form-control" maxlength="6" ng-model="record.Current_Total_Stock"/>
+			</div>
+		</div>
+	</form>
+	<form class="form-inline" role="form">
+		<div id="change_form" class="form-group">
+			<div class="col-md-4 col-sm-4">
+				<label>Qty ready for use: </label>
+				<input type="text" class="form-control" maxlength="5" ng-model="record.Qty_ready_for_use"/>
+			</div>
+			<div class="col-md-4 col-sm-4">
+				<label>Qty Work In Progress: </label>
+				<input type="text" class="form-control" maxlength="5" ng-model="record.Qty_WIP"/>
+			</div>
+			<div class="col-md-4 col-sm-3">
+				<label>Days to deliver: </label>
+				<input type="text" class="form-control" maxlength="5" ng-model="record.Days_to_deliver"/>
 			</div>
 		</div>
 	</form>
@@ -333,6 +366,9 @@ $userRow=mysqli_fetch_array($res);
 				<th ng-click="sort('Supplier')">Supplier<span class="glyphicon sort-icon" ng-show="sortKey=='Supplier'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
 				<th>Trigger Qty</th>
 				<th>Replenish Qty</th>
+				<th>Qty ready for use</th>
+				<th>Qty Work In Progress</th>
+				<th>Days to deliver</th>
 			</tr>
     </thead>
     <tbody ng-show="table_body">
@@ -349,11 +385,14 @@ $userRow=mysqli_fetch_array($res);
         <td>{{i.Selling_Price | currency:"£":0}}</td>
 				<td>{{i.Rejects_Scrap}}</td>
 				<td>{{i.Raw_Material_Stock}}</td>
-				<td>{{i.Finished_Goods_Stock}}</td>
+				<td>{{i.Finish_Goods_Stock}}</td>
 				<td>{{i.Current_Total_Stock}}</td>
 				<td>{{i.Supplier}}</td>
 				<td>{{i.Trigger_qty}}</td>
 				<td>{{i.Replenish_qty}}</td>
+				<td>{{i.Qty_ready_for_use}}</td>
+				<td>{{i.Qty_WIP}}</td>
+				<td>{{i.Days_to_deliver}}</td>
 				<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editrecord"></i></td>
 				<!-- <td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)"></i></td> -->
 			</tr>

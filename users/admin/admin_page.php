@@ -14,7 +14,7 @@ $userRow=mysqli_fetch_array($res);
 ?>
 <html ng-app="WEapp">
 <head>
-  <title>Welcome - <?php echo $userRow['username'];?></title>
+  <title>Main - <?php echo $userRow['username'];?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"><!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.css">
@@ -56,6 +56,7 @@ $userRow=mysqli_fetch_array($res);
 	        <li><a href="/users/admin/stock.php">Stock</a></li>
 	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
 	        <li><a href="/users/admin/metrics.php">Metrics</a></li>
+					<li><a href="#">Purchase list</a></li>
 					<li><a href="/users/upload.php">Upload</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">

@@ -18,10 +18,13 @@ Finish_Goods_Stock=?,
 Current_Total_Stock=?,
 Supplier=?,
 Trigger_qty=?,
-Replenish_qty=?
+Replenish_qty=?,
+Qty_ready_for_use=?,
+Qty_WIP=?,
+Days_to_deliver=?
 WHERE ID=?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("sssisssiiiiiisiii", $objData->Casting_Supplier_part_no,
+$stmt->bind_param("sssisssiiiiiisiiiiii", $objData->Casting_Supplier_part_no,
 $objData->Finished_part_no,
 $objData->Description,
 $objData->BOM,
@@ -37,6 +40,9 @@ $objData->Current_total_stock,
 $objData->Supplier,
 $objData->Trigger,
 $objData->Replenish,
+$objData->Qty_ready_for_use,
+$objData->Qty_WIP,
+$objData->Days_to_deliver,
 $objData->ID);
 
 $stmt->execute();

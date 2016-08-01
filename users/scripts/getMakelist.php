@@ -6,13 +6,14 @@
 // $start = 0;
 // $dataCount = 2;
 
-$sql = "select * from makelist LIMIT ?,?";
+$sql = "SELECT * FROM makelist WHERE makelist_creation_date = ? LIMIT ?,?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("ii", $objData->start,$objData->dataCount);
+$stmt->bind_param("sii", $objData->date, $objData->start,$objData->dataCount);
 
 
-$sql2 = "select count(*) as count from makelist";
+$sql2 = "SELECT count(*) as count FROM makelist WHERE makelist_creation_date = ?";
 $stmt2 = $mysqli->prepare($sql2);
+$stmt2->bind_param("s", $objData->date);
 
 
 $stmt->execute();

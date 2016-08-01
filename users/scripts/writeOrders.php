@@ -14,27 +14,24 @@
 	// $todaysDateFormated = '2016-06-20'; //same
 	// $todaysDate = '20-06-2016';
 
-	$todaysDateFormated = '2016-08-01'; // manual date for testing purposes
-	$todaysDate = '01-08-2016';
+	$todaysDateFormated = '2016-08-02'; // manual date for testing purposes
+	$todaysDate = '02-08-2016';
 
-	// $sql = "SELECT Order_Receive_Date FROM orders LIMIT 1";
-	// $stmt = $mysqli->prepare($sql);
-	// $stmt->execute();
-	//
-	// $result = $stmt->get_result();
-	// $data = array();
-	//
-	// while ($row = mysqli_fetch_array($result)) {
-	// 	$orderDate = $row['Order_Receive_Date'];
-	// }
-	//
-	// if($orderDate == $todaysDateFormated) { //if todays date is the same as date in orders table
-	// 	return; //do nothing
-	// }
-	// else { //write new orders data to database
-	// 	$sql2 = "DELETE FROM orders";
-	// 	$stmt2 = $mysqli->prepare($sql2);
-	// 	$stmt2->execute();
+	$sql = "SELECT Order_Receive_Date FROM orders WHERE Order_Receive_Date IN (SELECT MAX(Order_Receive_Date) FROM orders)";
+	$stmt = $mysqli->prepare($sql);
+	$stmt->execute();
+
+	$result = $stmt->get_result();
+	$data = array();
+
+	while ($row = mysqli_fetch_array($result)) {
+		$orderDate = $row['Order_Receive_Date'];
+	}
+
+	if($orderDate == $todaysDateFormated) { //if todays date is the same as date in orders table
+		return; //do nothing
+	}
+	else { //write new orders data to database
 
 			$file_location = "../../uploads/$todaysDate.csv"; //location of the orders file
 
@@ -61,6 +58,6 @@
 				$stmt->execute();
 		}
 
-	// }
+	}
 
 ?>

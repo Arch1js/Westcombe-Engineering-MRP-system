@@ -107,13 +107,17 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
     				Selling_Price: $scope.Selling_Price,
     				Rejects_Scrap: $scope.Rejects_Scrap,
     				Raw_Material_Stock: $scope.Raw_Material_Stock,
-    				Finished_goods_stock: $scope.Finished_Goods_Stock,
+    				Finished_goods_stock: $scope.Finish_Goods_Stock,
     				Current_total_stock: $scope.Current_Total_Stock,
     				Additional_Info: $scope.Additional_Info,
     				Description: $scope.Description,
-            Trigger: $scope.record.AddTrigger_qty,
-            Replenish: $scope.record.AddReplenish_qty
+            Trigger: $scope.AddTrigger_qty,
+            Replenish: $scope.AddReplenish_qty,
+            Qty_ready_for_use: $scope.Qty_ready_for_use,
+            Qty_WIP: $scope.Qty_WIP,
+            Days_to_deliver: $scope.Days_to_deliver
       };
+      console.log(data);
       $http.post($scope.url, data);
 
   $scope.data.push(data);
@@ -133,12 +137,15 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
    				Selling_Price: $scope.record.Selling_Price,
    				Rejects_Scrap: $scope.record.Rejects_Scrap,
    				Raw_Material_Stock: $scope.record.Raw_Material_Stock,
-   				Finished_goods_stock: $scope.record.Finished_Goods_Stock,
+   				Finished_goods_stock: $scope.record.Finish_Goods_Stock,
    				Current_total_stock: $scope.record.Current_Total_Stock,
    				Additional_Info: $scope.record.Additional_Info,
    				Description: $scope.record.Description,
           Trigger: $scope.record.Trigger_qty,
           Replenish: $scope.record.Replenish_qty,
+          Qty_ready_for_use: $scope.record.Qty_ready_for_use,
+          Qty_WIP: $scope.record.Qty_WIP,
+          Days_to_deliver: $scope.record.Days_to_deliver,
           ID:$scope.record.ID
        };
 

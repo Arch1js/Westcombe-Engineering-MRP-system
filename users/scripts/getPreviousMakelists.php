@@ -15,8 +15,13 @@ $data = array();
 while ($row = mysqli_fetch_array($result)) {
   $data[] = $row;
 }
+if(empty($data)) {
+	echo "Empty";
+}
+else {
+	echo json_encode(array($data));
+}
 
-echo json_encode(array($data));
 $stmt->close();
 
 ?>

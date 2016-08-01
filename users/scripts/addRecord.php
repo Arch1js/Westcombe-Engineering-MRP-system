@@ -19,10 +19,13 @@ Finished_Part,
 Current_Total_Stock,
 Supplier,
 Trigger_qty,
-Replenish_qty)
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+Replenish_qty,
+Qty_ready_for_use,
+Qty_WIP,
+Days_to_deliver)
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("ssisssiiiiisisii", $objData->Casting_Supplier_part_no,
+$stmt->bind_param("ssisssiiiiisisiiiii", $objData->Casting_Supplier_part_no,
 $objData->Description,
 $objData->BOM,
 $objData->Additional_Info,
@@ -37,7 +40,10 @@ $objData->Finished_part_no,
 $objData->Current_total_stock,
 $objData->Supplier,
 $objData->Trigger,
-$objData->Replenish);
+$objData->Replenish,
+$objData->Qty_ready_for_use,
+$objData->Qty_WIP,
+$objData->Days_to_deliver);
 $stmt->execute();
 $stmt->close();
 ?>

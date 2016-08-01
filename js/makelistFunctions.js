@@ -9,6 +9,18 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
     window.print();
   }
 
+  $scope.setStatusColor = function(i) {
+    if (i.status == "Active") {
+      return "btn-success";
+    }
+    else if(i.status == "Pending") {
+      return "btn-warning";
+    }
+    else {
+      return "btn-danger";
+    }
+  }
+
   $scope.openSelection = function(i) { //open selection in new modal window
       $scope.record = i;
   }
@@ -31,10 +43,10 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
     $http.post($scope.url).
       success(function(data, status) {
         $scope.orderWeekArray= data[0];
-        $scope.orderWeek = $scope.orderWeekArray[0].week;
+        $scope.makelistWeek = $scope.orderWeekArray[0].week;
 
-        $scope.loadData(1);
-      })
+        $scope.getMakelist(1); //run function on page load
+      });
   }
 
   $scope.getPreviousMakelists();
@@ -52,10 +64,10 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
       $scope.loading = false;
       $scope.dataRefreshSuccess = true;
     });
-    ;
   }
 
   $scope.getMakelist = function(page) {
+
     $scope.dataRefreshSuccess = false;
     $scope.nodataError = false;
     $scope.paginator_bottom = true;
@@ -74,6 +86,7 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
     var start = 0;
 
     var data = {
+      date: $scope.makelistWeek,
       dataCount: incr,
       start: start
     };
@@ -98,7 +111,6 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
       });
     }
 
-    $scope.getMakelist(1); //run function on page load
 }
 app.filter('start', function () { //splice search results for pagination
     return function (input, start) {
