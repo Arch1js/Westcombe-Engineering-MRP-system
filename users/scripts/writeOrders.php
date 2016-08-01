@@ -14,8 +14,8 @@
 	// $todaysDateFormated = '2016-06-20'; //same
 	// $todaysDate = '20-06-2016';
 
-	$todaysDateFormated = '2016-06-27'; // manual date for testing purposes
-	$todaysDate = '27-06-2016';
+	$todaysDateFormated = '2016-08-01'; // manual date for testing purposes
+	$todaysDate = '01-08-2016';
 
 	// $sql = "SELECT Order_Receive_Date FROM orders LIMIT 1";
 	// $stmt = $mysqli->prepare($sql);
@@ -35,8 +35,8 @@
 	// 	$sql2 = "DELETE FROM orders";
 	// 	$stmt2 = $mysqli->prepare($sql2);
 	// 	$stmt2->execute();
-			// $file_location = "https://drive.google.com/uc?export=download&id=0B-KUtsSOioNecTZCNFdSRElIV1U"; //location of the orders file using google drive for hosting
-			$file_location = "C:\\Users\\Arturs\\Desktop\\$todaysDate.csv"; //location of the orders file
+
+			$file_location = "../../uploads/$todaysDate.csv"; //location of the orders file
 
 			$handle = fopen($file_location, "r");
 

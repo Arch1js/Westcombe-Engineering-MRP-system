@@ -56,6 +56,7 @@ $userRow=mysqli_fetch_array($res);
 	        <li><a href="/users/admin/stock.php">Stock</a></li>
 	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
 	        <li><a href="/users/admin/metrics.php">Metrics</a></li>
+					<li><a href="/users/upload.php">Upload</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <div id="content">
