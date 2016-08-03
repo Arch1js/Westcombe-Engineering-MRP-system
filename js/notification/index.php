@@ -1,8 +1,8 @@
 <?php
 
-require(dirname(__FILE__).'/../vendor/autoload.php');
+require(dirname(__FILE__).'/../pusher/vendor/autoload.php');
 
-require('../vendor/pusher/pusher-php-server/lib/Pusher.php');
+require('/../pusher/vendor/pusher/pusher-php-server/lib/Pusher.php');
 
 $app_id = '228977';
 $app_key = 'fcd14057ed504b2df470';

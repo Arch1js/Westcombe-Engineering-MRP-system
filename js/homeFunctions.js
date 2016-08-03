@@ -20,11 +20,11 @@ function homeCtrl($scope, $http) { //main controller for stock page
 
 	});
 $scope.send = function() {
-  console.log('Badge');
+
   $scope.badge = true;
 
   var text = $scope.notification_text;
-  $.post('/js/pusher/notification/index.php', {message: text}).success(function(){
+  $.post('/js/notification/index.php', {message: text}).success(function(){
     console.log('Notification sent!');
   });
 }
