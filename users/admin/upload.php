@@ -1,13 +1,13 @@
 <?php
 session_start();
-require '/dbconnect.php';
+require '../dbconnect.php';
 
 if(!isset($_SESSION['user']))
 {
-	header("Location: validate_session.php");
+	header("Location: ../validate_session.php");
 }
 else if($_SESSION["privilige"] != 'admin') {
-	header("Location: access_denied.html");
+	header("Location: ../access_denied.html");
 }
 $res=mysqli_query($mysqli, "SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
 $userRow=mysqli_fetch_array($res);
@@ -70,7 +70,7 @@ $userRow=mysqli_fetch_array($res);
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
-	<form action="scripts/file_upload.php" method="post" enctype="multipart/form-data" style="margin-left: 20px;">
+	<form action="admin_scripts/file_upload.php" method="post" enctype="multipart/form-data" style="margin-left: 20px;">
     Select CSV to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Upload file" name="submit">

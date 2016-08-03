@@ -2,7 +2,7 @@
 
 require(dirname(__FILE__).'/../vendor/autoload.php');
 
-require('Pusher.php');
+require('../vendor/pusher/pusher-php-server/lib/Pusher.php');
 
 $app_id = '228977';
 $app_key = 'fcd14057ed504b2df470';
