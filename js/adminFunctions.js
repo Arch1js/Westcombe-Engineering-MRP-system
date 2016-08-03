@@ -2,6 +2,9 @@ var app = angular.module('WEapp', ['ui.bootstrap']);
 
 function adminCtrl($scope, $http, $filter) { //main controller for stock page
 
+
+  $scope.users = 'active';
+
   window.onload = function() {
     $scope.loadUsers(1);
   };

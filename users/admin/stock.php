@@ -34,290 +34,37 @@ $userRow=mysqli_fetch_array($res);
 </head>
 <body>
 	<div ng-controller="stockCtrl">
-	<nav class="navbar navbar-inverse navbar-default">
-	  <div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="#">
-	        <img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
-	      </a>
-	    </div>
+		<nav class="navbar navbar-inverse navbar-default">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">
+		        <img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
+		      </a>
+		    </div>
 
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-	        <li><a href="/users/admin/admin_page.php">Home</a></li>
-					<li><a href="/users/admin/manageUsers.php">Users</a></li>
-	        <li><a href="/users/admin/orders.php">Orders</a></li>
-	        <li class="active"><a href="/users/admin/stock.php">Stock</a></li>
-	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
-	        <li><a href="/users/admin/metrics.php">Metrics</a></li>
-					<li><a href="#">Purchase list</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <div id="content">
-	          	<?php echo $userRow['username'];
-	              $username= $userRow['username'];
-	              require '../dbconnect.php';
-	              $res=mysqli_query($mysqli,"SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
-	              echo '<img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">';
-	              ?>
-								<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
-	          </div>
-	      </ul>
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
-	<!-- Add Modal -->
-	<div class="modal fade" id="addModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-	<!-- Modal content-->
-	<div class="modal-content">
-			<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
-	</div>
-	<div class="modal-body">
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-		<div class="col-md-4 col-sm-4">
-			<label>Finished part no: </label>
-			<input type="text" class="form-control" maxlength="20" ng-model="Finished_Part" required/>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label>Casting or Supplier part no: </label>
-			<input type="text" class="form-control" maxlength="20" ng-model="Casting_or_Supplier_Pt_No"/>
-		</div>
-			<div class="col-md-3 col-sm-3">
-			<label>BOM Qty's: </label>
-			<input type="text" class="form-control" maxlength="5" ng-model="Qty_s_BOM"/>
-		</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-		<div class="col-md-4 col-sm-4">
-			<label>Supplier name: </label>
-			<input type="text" class="form-control" maxlength="38" ng-model="Supplier"/>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label>Stores Location: </label>
-			<input type="text" class="form-control" maxlength="9" ng-model="Stores_Location"/>
-		</div>
-		<div class="col-md-3 col-sm-3">
-			<label>Finished part weight: </label>
-			<input type="text" class="form-control" maxlength="50" ng-model="Finished_Part_Weight_Kg"/>
-		</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>P/P Cost Raw: </label>
-				<input type="text" class="form-control" maxlength="7" ng-model="P_P_Cost_Raw"/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Selling Price: </label>
-				<input type="text" class="form-control" maxlength="7" ng-model="Selling_Price"/>
-			</div>
-			<div class="col-md-4 col-sm-3">
-				<label>Rejects/Scrap: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="Rejects_Scrap"/>
-			</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>Raw Material Stock: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="Raw_Material_Stock"/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Finished goods stock: </label>
-				<input type="text" class="form-control" maxlength="6" ng-model="Finish_Goods_Stock"/>
-			</div>
-			<div class="col-md-4 col-sm-3">
-				<label>Current total stock: </label>
-				<input type="text" class="form-control" maxlength="6" ng-model="Current_Total_Stock"/>
-			</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>Qty ready for use: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="Qty_ready_for_use"/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Qty Work In Progress: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="Qty_WIP"/>
-			</div>
-			<div class="col-md-4 col-sm-3">
-				<label>Days to deliver: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="Days_to_deliver"/>
-			</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>Trigger Qty: </label>
-				<input type="number" class="form-control" maxlength="5" ng-model="AddTrigger_qty"/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Replenish Qty: </label>
-				<input type="number" class="form-control" maxlength="5" ng-model="AddReplenish_qty"/>
-			</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-5 col-sm-5">
-				<label>Additional Info: </label>
-				<textarea type="text" class="form-control" maxlength="100" ng-model="Additional_Info"rows="6" cols="40"></textarea>
-			</div>
-			<div class="col-md-5 col-sm-5">
-				<label>Description: </label>
-				<textarea type="text" class="form-control" maxlength="100" ng-model="Description" rows="6" cols="40"></textarea>
-			</div>
-		</div>
-	</form>
-	</div>
-	<div class="modal-footer">
-	<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addRecord(record)">Add part</button>
-		<button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
-	</div>
-</div>
-</div>
-</div>
-	<!-- Edit Modal -->
-	<div class="modal fade" id="editModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-	<!-- Modal content-->
-	<div class="modal-content">
-			<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
-	</div>
-	<div class="modal-body">
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-		<div class="col-md-4 col-sm-4">
-			<label>Finished part no: </label>
-			<input type="text" class="form-control" maxlength="20" ng-model="record.Finished_Part"/>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label>Casting or Supplier part no: </label>
-			<input type="text" class="form-control" maxlength="20" ng-model="record.Casting_or_Supplier_Pt_No"/>
-		</div>
-			<div class="col-md-3 col-sm-3">
-			<label>BOM Qty's: </label>
-			<input type="text" class="form-control" maxlength="5" ng-model="record.Qty_s_BOM"/>
-		</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-		<div class="col-md-4 col-sm-4">
-			<label>Supplier name: </label>
-			<input type="text" class="form-control" maxlength="38" ng-model="record.Supplier"/>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label>Stores Location: </label>
-			<input type="text" class="form-control" maxlength="9" ng-model="record.Stores_Location"/>
-		</div>
-		<div class="col-md-3 col-sm-3">
-			<label>Finished part weight: </label>
-			<input type="text" class="form-control" maxlength="50" ng-model="record.Finished_Part_Weight_Kg"/>
-		</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>P/P Cost Raw: </label>
-				<input type="text" class="form-control" maxlength="7" ng-model="record.P_P_Cost_Raw"/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Selling Price: </label>
-				<input type="text" class="form-control" maxlength="7" ng-model="record.Selling_Price"/>
-			</div>
-			<div class="col-md-4 col-sm-3">
-				<label>Rejects/Scrap: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="record.Rejects_Scrap"/>
-			</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>Raw Material Stock: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="record.Raw_Material_Stock"/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Finished goods stock: </label>
-				<input type="text" class="form-control" maxlength="6" ng-model="record.Finish_Goods_Stock"/>
-			</div>
-			<div class="col-md-4 col-sm-3">
-				<label>Current total stock: </label>
-				<input type="text" class="form-control" maxlength="6" ng-model="record.Current_Total_Stock"/>
-			</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>Qty ready for use: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="record.Qty_ready_for_use"/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Qty Work In Progress: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="record.Qty_WIP"/>
-			</div>
-			<div class="col-md-4 col-sm-3">
-				<label>Days to deliver: </label>
-				<input type="text" class="form-control" maxlength="5" ng-model="record.Days_to_deliver"/>
-			</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>Trigger Qty: </label>
-				<input type="number" class="form-control" maxlength="5" ng-model="record.Trigger_qty"/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Replenish Qty: </label>
-				<input type="number" class="form-control" maxlength="5" ng-model="record.Replenish_qty"/>
-			</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-5 col-sm-5">
-				<label>Additional Info: </label>
-				<textarea type="text" class="form-control" maxlength="100" ng-model="record.Additional_Info"rows="6" cols="40"></textarea>
-			</div>
-			<div class="col-md-5 col-sm-5">
-				<label>Description: </label>
-				<textarea type="text" class="form-control" maxlength="100" ng-model="record.Description" rows="6" cols="40"></textarea>
-			</div>
-		</div>
-	</form>
-	</div>
-	<div class="modal-footer">
-	<button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updateRecord(record)">Save changes</button>
-		<button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
-	</div>
-</div>
-</div>
-</div>
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		       <div navbar></div> <!--link to tab directive-->
+		      <ul class="nav navbar-nav navbar-right">
+		        <div id="content">
+		          	<?php echo $userRow['username'];?>
+		              <img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">
+	                <div ng-show="badge" class="badge"><i class="fa fa-bell-o" aria-hidden="true"></i></div></image>
+									<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+		          </div>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+<div addstock></div> <!--add stock item modal -->
+<div editstock></div> <!--edit stock item modal -->
 <div class="col-md-2 col-xs-12">
 	<form ng-submit="quickSearch(1)">
 		<div class="input-group">

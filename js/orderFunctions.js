@@ -2,6 +2,8 @@ var app = angular.module('WEapp', ['ui.bootstrap']);
 
 function orderCtrl($scope, $http, $filter) { //main controller for stock page
 
+  $scope.orders = 'active';
+
   $scope.data = [];
   $scope.dataCount = [];
   $scope.orderWeekArray = [];

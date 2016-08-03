@@ -2,6 +2,8 @@ var app = angular.module('WEapp', ['ui.bootstrap']);
 
 function makelistCtrl($scope, $http, $filter) { //main controller for stock page
 
+  $scope.makelist = 'active';
+
   $scope.data = [];
   $scope.dataCount = [];
 

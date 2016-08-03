@@ -34,111 +34,35 @@ $userRow=mysqli_fetch_array($res);
 </head>
 <body ng-controller="orderCtrl">
 	<nav class="navbar navbar-inverse navbar-default">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">
-					<img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
-				</a>
-			</div>
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">
+	        <img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
+	      </a>
+	    </div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="/users/admin/admin_page.php">Home</a></li>
-					<li><a href="/users/admin/manageUsers.php">Users</a></li>
-					<li class="active"><a href="/users/admin/orders.php">Orders</a></li>
-					<li><a href="/users/admin/stock.php">Stock</a></li>
-					<li><a href="/users/admin/makelist.php">Makelist</a></li>
-					<li><a href="/users/admin/metrics.php">Metrics</a></li>
-					<li><a href="#">Purchase list</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<div id="content">
-							<?php echo $userRow['username'];
-								$username= $userRow['username'];
-								require '../dbconnect.php';
-								$res=mysqli_query($mysqli,"SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
-								echo '<img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">';
-								?>
-								<a href="../user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
-						</div>
-				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	       <div navbar></div> <!--link to tab directive-->
+	      <ul class="nav navbar-nav navbar-right">
+	        <div id="content">
+	          	<?php echo $userRow['username'];?>
+	              <img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">
+                <div ng-show="badge" class="badge"><i class="fa fa-bell-o" aria-hidden="true"></i></div></image>
+								<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+	          </div>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
 	</nav>
-	<!-- Edit Modal -->
-	<div class="modal fade" id="editModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-	<!-- Modal content-->
-	<div class="modal-content">
-			<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
-	</div>
-	<div class="modal-body">
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-		<div class="col-md-4 col-sm-4">
-			<label>ID: </label>
-			<input type="text" class="form-control" maxlength="20" ng-model="record.id" disabled/>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label>Supplier product code: </label>
-			<input type="text" class="form-control" maxlength="20" ng-model="record.Supplier_Product_Code" disabled/>
-		</div>
-			<div class="col-md-3 col-sm-3">
-			<label>Earliest Delivery Date: </label>
-			<input type="text" class="form-control" maxlength="5" ng-model="record.Earliest_Delivery_Date_Time" disabled/>
-		</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-		<div class="col-md-4 col-sm-4">
-			<label>Order Quantity: </label>
-			<input type="text" class="form-control" maxlength="38" ng-model="record.Order_Quantity" disabled/>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label>Consignee Code: </label>
-			<input type="text" class="form-control" maxlength="9" ng-model="record.Consignee_Code" disabled/>
-		</div>
-		<div class="col-md-3 col-sm-3">
-			<label>Order Line Status: </label>
-			<input type="text" class="form-control" maxlength="50" ng-model="record.Order_Line_Status" disabled/>
-		</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-7 col-sm-5">
-				<label>Comments (max lenght 120 char): </label>
-				<textarea type="text" class="form-control" maxlength="120" ng-model="record.Comment"rows="6" cols="40"></textarea>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Status: </label>
-				<select class="form-control" ng-model="record.Status">
-					<option value="Active">Active</option>
-					<option value="Pending">Pending</option>
-					<option value="On-Hold">On-Hold</option>
-				</select>
-			</div>
-		</div>
-	</form>
-	</div>
-	<div class="modal-footer">
-	<button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updateOrder(record)">Save changes</button>
-		<button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
-	</div>
-</div>
-</div>
-</div>
+<div editorder></div>
 	<div class="col-md-5 col-sm-4 no-print" id="action_buttons" ng-hide="action_buttons">
 		<button type="button" class="btn btn-warning" ng-click="getNewestData()"><span class="fa fa-refresh"></span> Refresh Data</button>
 		<button type="button" class="btn btn-success" ng-click="loadData(1)"><span class="fa fa-tasks"></span> Load Data</button>

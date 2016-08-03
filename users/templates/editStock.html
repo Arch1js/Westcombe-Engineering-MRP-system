@@ -1,0 +1,122 @@
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+<!-- Modal content-->
+<div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
+</div>
+<div class="modal-body">
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+  <div class="col-md-4 col-sm-4">
+    <label>Finished part no: </label>
+    <input type="text" class="form-control" maxlength="20" ng-model="record.Finished_Part"/>
+  </div>
+  <div class="col-md-4 col-sm-4">
+    <label>Casting or Supplier part no: </label>
+    <input type="text" class="form-control" maxlength="20" ng-model="record.Casting_or_Supplier_Pt_No"/>
+  </div>
+    <div class="col-md-3 col-sm-3">
+    <label>BOM Qty's: </label>
+    <input type="text" class="form-control" maxlength="5" ng-model="record.Qty_s_BOM"/>
+  </div>
+  </div>
+</form>
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+  <div class="col-md-4 col-sm-4">
+    <label>Supplier name: </label>
+    <input type="text" class="form-control" maxlength="38" ng-model="record.Supplier"/>
+  </div>
+  <div class="col-md-4 col-sm-4">
+    <label>Stores Location: </label>
+    <input type="text" class="form-control" maxlength="9" ng-model="record.Stores_Location"/>
+  </div>
+  <div class="col-md-3 col-sm-3">
+    <label>Finished part weight: </label>
+    <input type="text" class="form-control" maxlength="50" ng-model="record.Finished_Part_Weight_Kg"/>
+  </div>
+  </div>
+</form>
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+    <div class="col-md-4 col-sm-4">
+      <label>P/P Cost Raw: </label>
+      <input type="text" class="form-control" maxlength="7" ng-model="record.P_P_Cost_Raw"/>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label>Selling Price: </label>
+      <input type="text" class="form-control" maxlength="7" ng-model="record.Selling_Price"/>
+    </div>
+    <div class="col-md-4 col-sm-3">
+      <label>Rejects/Scrap: </label>
+      <input type="text" class="form-control" maxlength="5" ng-model="record.Rejects_Scrap"/>
+    </div>
+  </div>
+</form>
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+    <div class="col-md-4 col-sm-4">
+      <label>Raw Material Stock: </label>
+      <input type="text" class="form-control" maxlength="5" ng-model="record.Raw_Material_Stock"/>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label>Finished goods stock: </label>
+      <input type="text" class="form-control" maxlength="6" ng-model="record.Finish_Goods_Stock"/>
+    </div>
+    <div class="col-md-4 col-sm-3">
+      <label>Current total stock: </label>
+      <input type="text" class="form-control" maxlength="6" ng-model="record.Current_Total_Stock"/>
+    </div>
+  </div>
+</form>
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+    <div class="col-md-4 col-sm-4">
+      <label>Qty ready for use: </label>
+      <input type="text" class="form-control" maxlength="5" ng-model="record.Qty_ready_for_use"/>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label>Qty Work In Progress: </label>
+      <input type="text" class="form-control" maxlength="5" ng-model="record.Qty_WIP"/>
+    </div>
+    <div class="col-md-4 col-sm-3">
+      <label>Days to deliver: </label>
+      <input type="text" class="form-control" maxlength="5" ng-model="record.Days_to_deliver"/>
+    </div>
+  </div>
+</form>
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+    <div class="col-md-4 col-sm-4">
+      <label>Trigger Qty: </label>
+      <input type="number" class="form-control" maxlength="5" ng-model="record.Trigger_qty"/>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label>Replenish Qty: </label>
+      <input type="number" class="form-control" maxlength="5" ng-model="record.Replenish_qty"/>
+    </div>
+  </div>
+</form>
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+    <div class="col-md-5 col-sm-5">
+      <label>Additional Info: </label>
+      <textarea type="text" class="form-control" maxlength="100" ng-model="record.Additional_Info"rows="6" cols="40"></textarea>
+    </div>
+    <div class="col-md-5 col-sm-5">
+      <label>Description: </label>
+      <textarea type="text" class="form-control" maxlength="100" ng-model="record.Description" rows="6" cols="40"></textarea>
+    </div>
+  </div>
+</form>
+</div>
+<div class="modal-footer">
+<button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updateRecord(record)">Save changes</button>
+  <button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
+</div>
+</div>
+</div>
+</div>

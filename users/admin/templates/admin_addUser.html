@@ -1,0 +1,51 @@
+<!-- Add Modal -->
+<div class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog modal-md">
+<!-- Modal content-->
+<div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
+</div>
+<div class="modal-body">
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+  <div class="col-md-4 col-sm-4">
+    <label>Username: </label>
+    <input type="text" class="form-control" maxlength="20" ng-model="user.username" required/>
+  </div>
+  <div class="col-md-4 col-sm-4">
+    <label>Email: </label>
+    <input type="text" class="form-control" maxlength="20" ng-model="user.email" required/>
+  </div>
+    <div class="col-md-3 col-sm-3">
+      <label >Privilige: </label>
+      <select class="form-control" ng-model="user.privilige">
+        <option value="user" selected>User</option>
+        <option value="super user">Super User</option>
+        <option value="admin">Administrator</option>
+      </select>
+  </div>
+  </div>
+</form>
+<form class="form-inline" role="form">
+  <div id="change_form" class="form-group">
+    <div class="col-md-4 col-sm-4">
+      <label>Password: </label>
+      <input id="user_password1" type="password" class="form-control" ng-model="user.password" maxlength="15" required autofocus/>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <label>Confirm Password: </label>
+      <input id="user_password2" type="password" class="form-control" maxlength="15" required />
+    </div>
+  </div>
+</form>
+<p id="validate-status2"></p>
+</div>
+<div class="modal-footer">
+<button id="add_user" type="button" class="btn btn-success" data-dismiss="modal" ng-click="addUser()">Add User</button>
+  <button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
+</div>
+</div>
+</div>
+</div>

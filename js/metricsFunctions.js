@@ -2,6 +2,8 @@ var app = angular.module('WEapp', ['ui.bootstrap']);
 
 function chartCtrl($scope, $http) { //main controller for stock page
 
+  $scope.metrics = 'active';
+
   $scope.data = [];
   $scope.data2 = [];
 

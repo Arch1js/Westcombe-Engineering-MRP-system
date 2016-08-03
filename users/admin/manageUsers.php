@@ -15,6 +15,7 @@ $userRow=mysqli_fetch_array($res);
 <html ng-app="WEapp">
 <head>
   <title>Manage - <?php echo $userRow['username'];?></title>
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"><!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.css">
@@ -49,177 +50,24 @@ $userRow=mysqli_fetch_array($res);
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-	        <li><a href="/users/admin/admin_page.php">Home</a></li>
-					<li class="active"><a href="/users/admin/manageUsers.php">Users<span class="sr-only">(current)</span></a></li>
-	        <li><a href="/users/admin/orders.php">Orders</a></li>
-	        <li><a href="/users/admin/stock.php">Stock</a></li>
-	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
-	        <li><a href="/users/admin/metrics.php">Metrics</a></li>
-					<li><a href="#">Purchase list</a></li>
-	      </ul>
+	       <div navbar></div> <!--link to tab directive-->
 	      <ul class="nav navbar-nav navbar-right">
 	        <div id="content">
-	          	<?php echo $userRow['username'];
-	              $username= $userRow['username'];
-	              require '../dbconnect.php';
-	              $res=mysqli_query($mysqli,"SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
-	              echo '<img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">';
-	              ?>
+	          	<?php echo $userRow['username'];?>
+	              <img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">
+                <div ng-show="badge" class="badge"><i class="fa fa-bell-o" aria-hidden="true"></i></div></image>
 								<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
 	          </div>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
-	<!-- Add Modal -->
-	<div class="modal fade" id="addModal" role="dialog">
-			<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-	<div class="modal-content">
-			<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
-	</div>
-	<div class="modal-body">
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-		<div class="col-md-4 col-sm-4">
-			<label>Username: </label>
-			<input type="text" class="form-control" maxlength="20" ng-model="user.username" required/>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<label>Email: </label>
-			<input type="text" class="form-control" maxlength="20" ng-model="user.email" required/>
-		</div>
-			<div class="col-md-3 col-sm-3">
-				<label >Privilige: </label>
-				<select class="form-control" ng-model="user.privilige">
-					<option value="user" selected>User</option>
-					<option value="super user">Super User</option>
-					<option value="admin">Administrator</option>
-				</select>
-		</div>
-		</div>
-	</form>
-	<form class="form-inline" role="form">
-		<div id="change_form" class="form-group">
-			<div class="col-md-4 col-sm-4">
-				<label>Password: </label>
-				<input id="user_password1" type="password" class="form-control" ng-model="user.password" maxlength="15" required autofocus/>
-			</div>
-			<div class="col-md-4 col-sm-4">
-				<label>Confirm Password: </label>
-				<input id="user_password2" type="password" class="form-control" maxlength="15" required />
-			</div>
-		</div>
-	</form>
-	<p id="validate-status2"></p>
-	</div>
-	<div class="modal-footer">
-	<button id="add_user" type="button" class="btn btn-success" data-dismiss="modal" ng-click="addUser()">Add User</button>
-		<button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
-	</div>
-</div>
-</div>
-</div>
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" role="dialog">
-	<div class="modal-dialog modal-md">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
-			</div>
-			<div class="modal-body">
-				<h3>Are you sure you want to delete this user?</h3>
-				<p><b>User ID:</b> {{user.user_id}}</p>
-				<p><b>Username:</b> {{user.username}}</p>
-				<p><b>Email:</b> {{user.email}}</p>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-danger" data-dismiss="modal" ng-click="deleteUser()">Delete</button>
-				<button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
-			</div>
-		</div>
-	</div>
-</div>
-	<!-- Edit Modal -->
-<div class="modal fade" id="editModal" role="dialog">
- <div class="modal-dialog modal-md">
-	<!-- Modal content-->
-	<div class="modal-content">
-			<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<img width="100px" height="40px" alt="Brand" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe.png"><!-- Logo -->
-	</div>
-	<div class="modal-body">
-		<ul class="nav nav-tabs">
-	  	<li class="active"><a data-toggle="tab" href="#basic">Credentials</a></li>
-			<li><a data-toggle="tab" href="#password">Password</a></li>
-		</ul>
-		<div class="tab-content">
-    		<div id="basic" class="tab-pane fade in active">
-					<form class="form-inline" role="form">
-						<div id="change_form" class="form-group">
-							<br>
-						<div class="col-md-4 col-sm-4">
-							<label>User ID: </label>
-							<input type="text" class="form-control" maxlength="5" ng-model="user.user_id" disabled/>
-						</div>
-						<div class="col-md-3 col-sm-3">
-							<label>Username: </label>
-							<input type="text" class="form-control" maxlength="20" ng-model="user.username"/>
-						</div>
-						</div>
-					</form>
-					<form class="form-inline" role="form">
-						<div id="change_form" class="form-group">
-							<div class="col-md-4 col-sm-4">
-								<label >Privilige: </label>
-								<select class="form-control" ng-model="user.privilige">
-									<option value="user" selected>User</option>
-									<option value="super user">Super User</option>
-									<option value="admin">Administrator</option>
-								</select>
-							</div>
-							<div class="col-md-3 col-sm-3">
-								<label>Email: </label>
-								<input type="text" class="form-control" maxlength="20" ng-model="user.email"/>
-							</div>
-						</div>
-					</form>
-					<div class="modal-footer">
-					<button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updateCredentials(user)">Save changes</button>
-						<button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
-					</div>
-				</div>
-				<div id="password" class="tab-pane fade">
-					<form class="form-inline" role="form">
-						<div id="change_form" class="form-group">
-							<br>
-							<div class="col-md-4 col-sm-4">
-								<label>Password: </label>
-								<input id="password1" type="password" class="form-control" ng-model="user.newPassword" maxlength="15" required autofocus/>
-							</div>
-							<div class="col-md-4 col-sm-4">
-								<label>Confirm Password: </label>
-								<input id="password2" type="password" class="form-control" ng-model="user.repeatPassword" maxlength="15" required />
-							</div>
-						</div>
-					</form>
-					<p id="validate-status"></p>
-					<div class="modal-footer">
-					<button id="save_password" type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updatePassword(user)">Save changes</button>
-						<button type="button" class="btn btn-warning" data-toggle="modal" data-dismiss="modal">Cancel</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</div>
+<!-- Edit Modal directive-->
+<div edit></div>
+<!-- Add Modal directive-->
+<div add></div>
+<!-- Delete Modal directive -->
+<div delete></div>
 <div class="col-md-4" id="action_buttons">
 	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal"><span class="fa fa-plus"></span> Add user</button>
 	<button type="button" class="btn btn-warning" ng-click="edituser = !edituser"><span class="fa fa-pencil-square-o"></span> Edit user</button>

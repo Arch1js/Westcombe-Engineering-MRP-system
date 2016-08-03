@@ -12,7 +12,7 @@ else if($_SESSION["privilige"] != 'admin') {
 $res=mysqli_query($mysqli, "SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
 $userRow=mysqli_fetch_array($res);
 ?>
-<html ng-app="WEapp">
+<html>
 <head>
   <title>Welcome - <?php echo $userRow['username'];?></title>
 	<meta charset="UTF-8">
@@ -29,7 +29,7 @@ $userRow=mysqli_fetch_array($res);
 
 </head>
 <body>
-	<div ng-controller="stockCtrl">
+	<div>
 	<nav class="navbar navbar-inverse navbar-default">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->

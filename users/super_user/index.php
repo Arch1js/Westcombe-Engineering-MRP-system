@@ -58,13 +58,10 @@ $userRow=mysqli_fetch_array($res);
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <div id="content">
-	          	<?php echo $userRow['username'];
-	              $username= $userRow['username'];
-	              require '../dbconnect.php';
-	              $res=mysqli_query($mysqli,"SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
-	              echo '<img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">';
-	              ?>
-								<a href="../user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+						<?php echo $userRow['username'];?>
+							<img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png"></image>
+							<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+						</div>
 	          </div>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
