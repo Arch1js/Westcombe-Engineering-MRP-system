@@ -20,7 +20,6 @@ $userRow=mysqli_fetch_array($res);
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"><!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.css">
 	<link rel="stylesheet" href="../../css/makelist_style.css" type="text/css" /><!-- Stylesheet -->
-	<link rel="stylesheet" href="../../css/loader_animation.css" type="text/css" /><!-- Stylesheet -->
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.29/angular.js"></script><!-- AngularJS -->
 	<script src="../../dependencies/ui-bootstrap-tpls-1.2.5.js"></script><!-- Bootstrap UI -->

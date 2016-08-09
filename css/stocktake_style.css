@@ -1,0 +1,29 @@
+.navbar-brand {
+padding: 5px 15px;
+}
+.navbar {
+  margin-bottom: 0px;
+}
+#profile_image
+{
+    height: 50px;
+    width: 50px;
+    border: 1px solid white;
+    border-radius: 30px;
+    margin-left: 10px;
+}
+
+#content {
+  color: white;
+}
+#item {
+  border-bottom: 1px solid black;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+#confirmModal {
+  padding-top: 50%;
+}
+.modal-footer {
+  text-align: center;
+}

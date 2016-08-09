@@ -19,7 +19,6 @@ $userRow=mysqli_fetch_array($res);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"><!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.css">
-	<link rel="stylesheet" href="../../css/loader_animation.css" type="text/css" /><!-- loader animation Stylesheet -->
 	<link rel="stylesheet" href="../../css/user_style.css" type="text/css" /><!-- user Stylesheet -->
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.29/angular.js"></script><!-- AngularJS -->
