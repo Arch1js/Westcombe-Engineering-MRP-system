@@ -33,6 +33,7 @@ $userRow=mysqli_fetch_array($res);
 
 	<script>
 		var loc = <?php echo json_encode($_GET['location']); ?>;
+		var sessionUser = <?php echo json_encode($userRow['username']); ?>;
 	</script>
 
 </head>
