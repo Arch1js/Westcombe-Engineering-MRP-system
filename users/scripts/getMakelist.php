@@ -1,19 +1,18 @@
 <?php
 	include ("../dbconnect.php");
-	// include('writeOrders.php');
+
 	$data = file_get_contents("php://input");
 	$objData = json_decode($data);
-// $start = 0;
-// $dataCount = 2;
 
-$sql = "SELECT * FROM makelist WHERE makelist_creation_date = ? LIMIT ?,?";
+
+$sql = "SELECT * FROM makelist WHERE makelist_creation_date = ? AND makelistStatus = ? LIMIT ?,?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("sii", $objData->date, $objData->start,$objData->dataCount);
+$stmt->bind_param("ssii", $objData->date, $objData->status, $objData->start,$objData->dataCount);
 
 
-$sql2 = "SELECT count(*) as count FROM makelist WHERE makelist_creation_date = ?";
+$sql2 = "SELECT count(*) as count FROM makelist WHERE makelist_creation_date = ? AND makelistStatus = ?";
 $stmt2 = $mysqli->prepare($sql2);
-$stmt2->bind_param("s", $objData->date);
+$stmt2->bind_param("ss", $objData->date,$objData->status);
 
 
 $stmt->execute();

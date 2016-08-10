@@ -63,12 +63,13 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
     $scope.url = '/users/scripts/getMakelistData.php';
     $http.post($scope.url).
     success(function(data,status) {
+      console.log(data);
       $scope.loading = false;
       $scope.dataRefreshSuccess = true;
     });
   }
 
-  $scope.getMakelist = function(page) {
+  $scope.getMakelist = function(page, status) {
 
     $scope.dataRefreshSuccess = false;
     $scope.nodataError = false;
@@ -87,8 +88,13 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
 
     var start = 0;
 
+    if(!status) {
+      var status = $('.nav-tabs .active').text(); //get the current tab name
+    }
+
     var data = {
       date: $scope.makelistWeek,
+      status: status,
       dataCount: incr,
       start: start
     };

@@ -9,20 +9,6 @@ $todaysDate = "$currentDate[mday]-0$currentDate[mon]-$currentDate[year]"; //gets
 $todaysDate_replaced = str_replace('/', '-', $todaysDate); //change the date format suitable for database
 $todaysDateFormated = date("Y-m-d", strtotime($todaysDate_replaced));
 
-// $todaysDateFormated = '2016-08-02';
-
-//get the necessary info from orders table
-$sql = "SELECT id, Consignee_Code, Earliest_Delivery_Date_Time, Supplier_Product_Code, Order_Quantity FROM orders WHERE Order_Receive_Date in (SELECT MAX(Order_Receive_Date) from orders);";
-$stmt = $mysqli->prepare($sql); //prepare sql
-
-$stmt->execute(); //execute statement
-$result = $stmt->get_result();
-$stmt->close();
-$data = array(); //results stroed in array
-
-while ($row = mysqli_fetch_array($result)) { //loop trough results and store in array
-  $data[] = $row;
-}
 
 $sql4 = "SELECT makelist_creation_date FROM makelist WHERE makelist_creation_date IN (SELECT MAX(makelist_creation_date) FROM makelist)";
 $stmt4 = $mysqli->prepare($sql4);
@@ -38,7 +24,21 @@ while ($row4 = mysqli_fetch_array($result4)) { //loop trough results and store i
 if($todaysDateFormated == $makelist_creation_date) {
   return;
 }
-else {
+
+
+//get the necessary info from orders table
+$sql = "SELECT id, Consignee_Code, Earliest_Delivery_Date_Time, Supplier_Product_Code, Order_Quantity FROM orders WHERE Order_Receive_Date in (SELECT MAX(Order_Receive_Date) from orders);";
+$stmt = $mysqli->prepare($sql); //prepare sql
+
+$stmt->execute(); //execute statement
+$result = $stmt->get_result();
+$stmt->close();
+$data = array(); //results stroed in array
+
+while ($row = mysqli_fetch_array($result)) { //loop trough results and store in array
+  $data[] = $row;
+}
+
   foreach ($data as $data) { //foreach in orders array
   	$partNo = $data['Supplier_Product_Code']; //setting each rows data to temporary variable for use in later queries
   	$orderQty = $data['Order_Quantity'];
@@ -63,29 +63,43 @@ else {
       $replenish_qty = $row2['Replenish_qty'];
 
 
-  		if($orderQty > $stockQty || $stockQty <= $trigger_qty) {
+  		if($orderQty > $stockQty || $stockQty <= $trigger_qty || ($stockQty-$orderQty) <= $trigger_qty) {
 
-  			$reqQty = $trigger_qty + abs($stockQty - $orderQty) + $replenish_qty; //get the quantity needed to cover order
+  			$reqQty = abs($stockQty - $orderQty) + $replenish_qty; //get the quantity needed to cover order
 
   			$status = 'Active'; //sett all makelist items to Active
+        $makelistStatus = 'Make';
 
   			if($stockQty == '') {
   				$stockQty = 0;
   			}
 
-  			$sql3="INSERT INTO makelist (orderID, part_no, description, customer, delivery_date, stock, order_qty, req_qty, trigger_qty, replenish_qty, status, makelist_creation_date)
-  			VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+  			$sql3="INSERT INTO makelist (orderID, part_no, description, customer, delivery_date, stock, order_qty, req_qty, trigger_qty, replenish_qty, status, makelist_creation_date,makelistStatus)
+  			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
   			$stmt3 = $mysqli->prepare($sql3);
-  			$stmt3->bind_param("issssiiiiiss", $orderID, $partNo, $description, $customer, $delivery_date, $stockQty, $orderQty, $reqQty, $trigger_qty, $replenish_qty, $status, $todaysDateFormated);
+  			$stmt3->bind_param("issssiiiiisss", $orderID, $partNo, $description, $customer, $delivery_date, $stockQty, $orderQty, $reqQty, $trigger_qty, $replenish_qty, $status, $todaysDateFormated, $makelistStatus);
 
   			$stmt3->execute();
   			$stmt3->close();
 
   		}
+      else {
+        $status = 'Active'; //sett all makelist items to Active
+        $makelistStatus = 'Supply';
+        $reqQty = 0;
+
+        $sql3="INSERT INTO makelist (orderID, part_no, description, customer, delivery_date, stock, order_qty, req_qty, trigger_qty, replenish_qty, status, makelist_creation_date,makelistStatus)
+  			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+  			$stmt3 = $mysqli->prepare($sql3);
+  			$stmt3->bind_param("issssiiiiisss", $orderID, $partNo, $description, $customer, $delivery_date, $stockQty, $orderQty, $reqQty, $trigger_qty, $replenish_qty, $status, $todaysDateFormated, $makelistStatus);
+
+  			$stmt3->execute();
+  			$stmt3->close();
+      }
 
   	}
   }
-}
+
 
 
 ?>

@@ -61,11 +61,18 @@ $userRow=mysqli_fetch_array($res);
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+<ul class="nav nav-tabs no-print">
+  <li class="active"><a data-toggle="tab" href="#Make" ng-click="getMakelist(1, 'Make')">Make</a></li>
+  <li><a data-toggle="tab" href="#Supply" ng-click="getMakelist(1, 'Supply')">Supply</a></li>
+</ul>
 <div editmakelist></div>
+<div class="tab-content">
+	 <div id="Make" class="tab-pane fade in active">
+
 	<div class="col-md-4 col-sm-4 no-print" id="action_buttons" ng-hide="action_buttons">
 		<button type="button" class="btn btn-warning" ng-click="getNewMakelistData()"><span class="fa fa-refresh"></span> Get Data</button>
 		<button type="button" class="btn btn-success" ng-click="getPreviousMakelists()"><span class="fa fa-tasks"></span> Load Data</button>
-		<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder"><span class="fa fa-pencil-square-o"></span> Edit</button>
+		<button type="button" class="btn btn-danger"  ng-click="editMakelist = !editMakelist"><span class="fa fa-pencil-square-o"></span> Edit</button>
 		<button type="button" class="btn btn-primary"  ng-click="printMakelist()"><span class="fa fa-print"></span> Print Jobs</button>
 	</div>
 	<div class="col-md-1 no-print" ng-hide="ordersWeek">
@@ -74,7 +81,7 @@ $userRow=mysqli_fetch_array($res);
 		</select>
 	</div>
 	<div class="col-md-1 col-sm-5 col-xs-12 no-print" id="page_controller" ng-hide="perPage">
-		<select class="form-control" ng-model="pageSizeInput" ng-init="pageSizeInput='10'" ng-change="getMakelist(currentPage)">
+		<select class="form-control" ng-model="pageSizeInput" ng-init="pageSizeInput='10'" ng-change="getMakelist(currentPage, 'Make')">
 				<option value="10" selected>10</option>
 				<option value="25">25</option>
 				<option value="50">50</option>
@@ -85,7 +92,7 @@ $userRow=mysqli_fetch_array($res);
 		<div id="pageCounter">
 			<p>Page {{currentPage}} of {{numberOfItems/pageSizeInput | roundup}}</p>
 		</div>
-		<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="getMakelist(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
+		<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="getMakelist(currentPage, 'Make')" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
 	</div>
 <table class="table table-striped">
 	<thead>
@@ -118,19 +125,85 @@ $userRow=mysqli_fetch_array($res);
 		<td>{{i.replenish_qty}}</td>
 		<td><button ng-class="setStatusColor(i)" class="btn btn-sm">{{i.status}}</button></td>
 		<td>{{i.comments}}</td>
-		<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editOrder"></i></td>
+		<td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editMakelist"></i></td>
 	</tr>
+	</tbody>
+</table>
+<div id="paginator_bottom" class="col-md-4 col-sm-6 no-print" ng-hide="paginator_bottom">
+	<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="getMakelist(currentPage, 'Make')" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
+</div>
+</div>
+
+<div id="Supply" class="tab-pane fade">
+		<div class="col-md-4 col-sm-4 no-print" id="action_buttons" ng-hide="action_buttons">
+			<button type="button" class="btn btn-danger"  ng-click="editMakelist = !editMakelist"><span class="fa fa-pencil-square-o"></span> Edit</button>
+			<button type="button" class="btn btn-primary"  ng-click="printMakelist()"><span class="fa fa-print"></span> Print Jobs</button>
+		</div>
+<div class="col-md-1 no-print" ng-hide="ordersWeek">
+ <select id="week_selector" class="form-control" ng-model="makelistWeek" ng-init="orderWeek='week'" ng-change="getMakelist(currentPage, 'Supply')">
+	 <option ng-repeat="i in orderWeekArray" value="{{i.week}}">{{i.week}}</option>
+ </select>
+</div>
+<div class="col-md-1 col-sm-5 col-xs-12 no-print" id="page_controller" ng-hide="perPage">
+ <select class="form-control" ng-model="pageSizeInput" ng-init="pageSizeInput='10'" ng-change="getMakelist(currentPage, 'Supply')">
+		 <option value="10" selected>10</option>
+		 <option value="25">25</option>
+		 <option value="50">50</option>
+		 <option value="100">100</option>
+ </select>
+</div>
+<div id="paginator_top" class="col-md-4 col-sm-6 no-print" ng-hide="paginator">
+ <div id="pageCounter">
+	 <p>Page {{currentPage}} of {{numberOfItems/pageSizeInput | roundup}}</p>
+ </div>
+ <pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="getMakelist(currentPage, 'Supply')" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
+</div>
+<table class="table table-striped">
+		<thead>
+		 <tr>
+		 <th>Order ID</th>
+		 <th>Part number</th>
+		 <th>Description</th>
+		 <th>Customer</th>
+		 <th>Delivery Date</th>
+		 <th>Stock</th>
+		 <th>Order qty</th>
+		 <th>Required qty</th>
+		 <th>Trigger qty</th>
+		 <th>Replenish qty</th>
+		 <th>Status</th>
+		 <th>Comments</th>
+		</tr>
+	</thead>
+	<tbody ng-show="table_body">
+		<tr ng-repeat="i in data | start: (currentPage - 1) * pageSizeInput | limitTo: pageSizeInput">
+			 <td>{{i.orderID}}</td>
+			 <td>{{i.part_no}}</td>
+			 <td>{{i.description}}</td>
+			 <td>{{i.customer}}</td>
+			 <td>{{i.delivery_date}}</td>
+			 <td>{{i.stock}}</td>
+			 <td>{{i.order_qty}}</td>
+			 <td>{{i.req_qty}}</td>
+			 <td>{{i.trigger_qty}}</td>
+			 <td>{{i.replenish_qty}}</td>
+			 <td><button ng-class="setStatusColor(i)" class="btn btn-sm">{{i.status}}</button></td>
+			 <td>{{i.comments}}</td>
+			 <td><i style="cursor:pointer" class="fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#editModal" ng-click="openSelection(i)" ng-show="editMakelist"></i></td>
+		</tr>
 	</tbody>
 </table>
 <div id="paginator_bottom" class="col-md-4 col-sm-6 no-print" ng-hide="paginator_bottom">
 	<pagination total-items="numberOfItems" items-per-page="pageSizeInput"  ng-change="getMakelist(currentPage)" ng-model="currentPage" max-size="5" class="pagination-sm"></pagination>
 </div>
-<div loading></div>
+</div>
 <div class="alert alert-danger" ng-show="nodataError" class="col-xs-12">
 	<strong>Error!</strong> No pending jobs found!
 </div>
 <div class="alert alert-success" ng-show="dataRefreshSuccess" class="col-xs-12">
 	<strong>Awesome!</strong> List is updated with newest jobs! Press 'Load Data' to see them.
+</div>
+<div loading></div>
 </div>
 </body>
 </html>
