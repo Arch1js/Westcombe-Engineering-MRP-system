@@ -95,7 +95,7 @@ $userRow=mysqli_fetch_array($res);
 		<th>Username</th>
 		<th>Email Address</th>
 		<th>Password (Hash)</th>
-		<th>Privilige</th>
+		<th>Privilege</th>
 	</tr>
 </thead>
 <tbody ng-show="table_body">
