@@ -101,6 +101,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
       console.log(date);
     // }
     var start = 0;
+
            var data = {
              dataCount: incr,
              start: start,
@@ -113,6 +114,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
                $scope.data= data[0]; //save returned data to array
                $scope.dataCount= data[1];//save number of returned data to array
                $scope.numberOfItems = $scope.dataCount[0].count;
+
               //  $scope.orderWeekArray= data[2];
               //  $scope.orderWeek = $scope.orderWeekArray[0].week;
 

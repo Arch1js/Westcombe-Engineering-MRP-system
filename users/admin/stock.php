@@ -118,7 +118,7 @@ $userRow=mysqli_fetch_array($res);
 			</tr>
     </thead>
     <tbody ng-show="table_body">
-      <tr  ng-repeat="i in data | orderBy:sortKey:reverse | start: (currentPage - 1) * pageSizeInput | limitTo: pageSizeInput">
+      <tr  ng-repeat="i in data | start: (currentPage - 1) * pageSizeInput | limitTo: pageSizeInput | orderBy:sortKey:reverse">
 				<td>{{i.ID}}</td>
         <td>{{i.Finished_Part}}</td>
         <td>{{i.Casting_or_Supplier_Pt_No}}</td>
