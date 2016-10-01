@@ -1,20 +1,17 @@
-body {
-
-}
 .navbar-brand {
-padding: 5px 15px;
-}
-#profile_image
-{
-    height: 50px;
-    width: 50px;
-    border: 1px solid white;
-    border-radius: 30px;
-    margin-left: 10px;
-}
-#content {
-  color:white;
+  padding: 5px 15px;
 }
 .ct-label{
   font-size: 16em;
+}
+#profile_image
+{
+  height: 50px;
+  width: 50px;
+  border: 1px solid white;
+  border-radius: 30px;
+  margin-left: 10px;
+}
+#content {
+  color:white;
 }

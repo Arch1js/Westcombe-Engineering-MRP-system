@@ -8,40 +8,9 @@ overflow: hidden;
 .navbar-brand {
 padding: 5px 15px;
 }
-#profile_image
-{
-    height: 50px;
-    width: 50px;
-    border: 1px solid white;
-    border-radius: 30px;
-    margin-left: 10px;
-}
-#content {
-  color:white;
-}
 .ct-label{
   font-size: 16em;
 }
-#line_chart {
-  background-color: #5e35b1;
-  margin: 0px 5px 5px 5px;
-  height: 60%;
-}
-#chart {
-  background-color: #5e35b1;
-  margin: 5px;
-  height: 30%;
-}
-#chartdiv {
-	width	: 100%;
-	height	: 100%;
-}
-#chart3div {
-  width: 100%;
-  height: 100%;
-  font-size: 11px;
-}
-
 .amcharts-pie-slice {
   transform: scale(1);
   transform-origin: 50% 50%;
@@ -61,7 +30,17 @@ padding: 5px 15px;
 #chartdiv a,#chart2div a, #chart3div a,#chart4div a {
   visibility: hidden;
 }
-
+#profile_image
+{
+    height: 50px;
+    width: 50px;
+    border: 1px solid white;
+    border-radius: 30px;
+    margin-left: 10px;
+}
+#content {
+  color:white;
+}
 #chart2div {
 	width		: 100%;
 	height		: 100%;
@@ -71,6 +50,25 @@ padding: 5px 15px;
 	width		: 100%;
 	height		: 100%;
 	font-size	: 11px;
+}
+#line_chart {
+  background-color: #5e35b1;
+  margin: 0px 5px 5px 5px;
+  height: 60%;
+}
+#chart {
+  background-color: #5e35b1;
+  margin: 5px;
+  height: 30%;
+}
+#chartdiv {
+	width	: 100%;
+	height	: 100%;
+}
+#chart3div {
+  width: 100%;
+  height: 100%;
+  font-size: 11px;
 }
 h2 {
   color: white;

@@ -6,7 +6,6 @@ if(isset($_SESSION['user'])!="")
 {
 	header("Location: /login.html");
 }
-
     $userEmail = $_POST['user'];
     $userPassword = $_POST['pass'];
 
@@ -19,13 +18,13 @@ if(isset($_SESSION['user'])!="")
 
     $stmt->store_result();
     $stmt->bind_result($id, $user, $passwd);
-    if ($stmt->fetch())
-    {
+
+    if ($stmt->fetch()) {
 			$_SESSION["user"] = $id;
 			header("Location: /users/super_user/index.php");
     }
 else
-    {
-    header("location: /users/access_denied.html");
-    }
-    ?>
+{
+  header("location: /users/access_denied.html");
+}
+		?>

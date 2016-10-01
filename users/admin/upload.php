@@ -31,7 +31,6 @@ $userRow=mysqli_fetch_array($res);
 	<div>
 	<nav class="navbar navbar-inverse navbar-default">
 	  <div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 	        <span class="sr-only">Toggle navigation</span>
@@ -43,8 +42,6 @@ $userRow=mysqli_fetch_array($res);
 	        <img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
 	      </a>
 	    </div>
-
-	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li><a href="/users/admin/admin_page.php">Home</a></li>
@@ -66,8 +63,8 @@ $userRow=mysqli_fetch_array($res);
 								<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
 	          </div>
 	      </ul>
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
+	    </div>
+	  </div>
 	</nav>
 	<form action="admin_scripts/file_upload.php" method="post" enctype="multipart/form-data" style="margin-left: 20px;">
     Select CSV to upload:

@@ -1,8 +1,8 @@
 <?php
-	include ("../dbconnect.php");
-	// include('writeOrders.php');
-	$data = file_get_contents("php://input");
-	$objData = json_decode($data);
+include ("../dbconnect.php");
+
+$data = file_get_contents("php://input");
+$objData = json_decode($data);
 
 
 $sql = "SELECT DISTINCT makelist_creation_date as week FROM makelist ORDER BY makelist_creation_date DESC";
@@ -23,5 +23,4 @@ else {
 }
 
 $stmt->close();
-
 ?>

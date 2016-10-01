@@ -3,15 +3,14 @@ var app = angular.module('WEapp', ['ui.bootstrap']);
 function makelistCtrl($scope, $http, $filter) { //main controller for stock page
 
   $scope.makelist = 'active';
-
   $scope.data = [];
   $scope.dataCount = [];
 
-  $scope.printMakelist = function() {
+  $scope.printMakelist = function() { //print
     window.print();
   }
 
-  $scope.setStatusColor = function(i) {
+  $scope.setStatusColor = function(i) { //set colours for different statuses
     if (i.status == "Active") {
       return "btn-success";
     }
@@ -27,7 +26,9 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
       $scope.record = i;
   }
 
-  $scope.updateMakelist = function() {
+  $scope.updateMakelist = function() { //update makelist data
+
+    $scope.url = '/users/scripts/updateMakelist.php';
     var data = {
       id: $scope.record.orderID,
       status: $scope.record.status,
@@ -36,15 +37,18 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
       delivery_date: $scope.record.delivery_date,
       comments: $scope.record.comments
     };
-    $scope.url = '/users/scripts/updateMakelist.php';
+
     $http.post($scope.url, data);
   }
 
-  $scope.getPreviousMakelists = function() {
-    $scope.url = '/users/scripts/getPreviousMakelists.php';
+  $scope.getPreviousMakelists = function() { //get previous week makelist data
+
+    $scope.url = '/users/scripts/getPreviousMakelists.php'; //post address
+
     $http.post($scope.url).
       success(function(data, status) {
-        $scope.orderWeekArray= data[0];
+
+        $scope.orderWeekArray= data[0]; //save week data to array
         $scope.makelistWeek = $scope.orderWeekArray[0].week;
 
         $scope.getMakelist(1); //run function on page load
@@ -54,6 +58,8 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
   $scope.getPreviousMakelists();
 
   $scope.getNewMakelistData = function() {
+
+    //hide all things while data is loaded
     $scope.dataRefreshSuccess = false;
     $scope.nodataError = false;
     $scope.paginator_bottom = true;
@@ -61,16 +67,17 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
     $scope.loading = true;
 
     $scope.url = '/users/scripts/getMakelistData.php';
+
     $http.post($scope.url).
-    success(function(data,status) {
-      console.log(data);
+      success(function(data,status) {
       $scope.loading = false;
-      $scope.dataRefreshSuccess = true;
+      $scope.dataRefreshSuccess = true; //show success message
     });
   }
 
   $scope.getMakelist = function(page, status) {
 
+    //hide all things while data is loaded
     $scope.dataRefreshSuccess = false;
     $scope.nodataError = false;
     $scope.paginator_bottom = true;
@@ -78,6 +85,7 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
     $scope.loading = true;
 
     $scope.currentPage = page;
+
     if($scope.pageSizeInput == null) {
       $scope.pageSizeInput = 10;
       var incr = $scope.pageSizeInput * $scope.currentPage;
@@ -92,13 +100,15 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
       var status = $('.nav-tabs .active').text(); //get the current tab name
     }
 
-    var data = {
+    var data = { //data to be sent
       date: $scope.makelistWeek,
       status: status,
       dataCount: incr,
       start: start
     };
+
     $scope.url2 = '/users/scripts/getMakelist.php';
+
     $http.post($scope.url2,data).
       success(function(data,status) {
         $scope.data= data[0]; //save returned data to array

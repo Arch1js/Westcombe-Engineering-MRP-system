@@ -37,7 +37,6 @@ $objData->quick,
 $objData->quick,
 $objData->quick);
 
-
 $stmt->execute();
 $result = $stmt->get_result();
 $data = array();

@@ -2,10 +2,9 @@ var app = angular.module('WEapp', []);
 
 
 function stockTakeCtrl($scope, $http) { //main controller for stock page
+
   $scope.loading = true;
-
   $scope.data = [];
-
   $scope.url = '/users/scripts/getProduct.php'; //post url
 
   var data = {
@@ -13,29 +12,25 @@ function stockTakeCtrl($scope, $http) { //main controller for stock page
   };
 
   $http.post($scope.url,data)
-  .success(function(data,status) {
+    .success(function(data,status) {
       $scope.loading = false;
       $scope.data= data;
       $scope.copy = angular.copy($scope.data);
     });
 
 
-$scope.cancel = function() {
+$scope.cancel = function() { //cancel stock take action
   $scope.savebtn = false;
   $scope.cancelbtn = false;
-  $scope.data = angular.copy($scope.copy);
+  $scope.data = angular.copy($scope.copy); //show qty as it was before
 }
 
-$scope.show = function() {
+$scope.show = function() { //show buttons on count change
   $scope.savebtn = true;
   $scope.cancelbtn = true;
 }
 
-$scope.saveChange = function(i) {
-
-    // console.log($scope.copy);
-    // console.log($scope.data);
-
+$scope.saveChange = function(i) {//save change
     $scope.savebtn = false;
     $scope.cancelbtn = false;
 
@@ -54,16 +49,14 @@ $scope.saveChange = function(i) {
       location: location,
       user: user
     };
-    console.log(i[4]);
+
     i[4] = i.Finish_Goods_Stock; //save new qty to scope
     $scope.copy = angular.copy($scope.data);
-    console.log(i[4]);
 
     $http.post($scope.url,data)
     .success(function(status) {
           $('#confirmModal').modal('show');
           console.log(status);
-        });
-
+    });
   }
 }

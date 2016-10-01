@@ -1,7 +1,5 @@
 <?php
-
 require(dirname(__FILE__).'js/pusher/vendor/autoload.php');
-
 require('js/pusher/vendor/pusher/pusher-php-server/lib/Pusher.php');
 
 $app_id = '228977';
@@ -14,5 +12,4 @@ $text = htmlspecialchars($_POST['message']);
 
 $data['message'] = $text;
 $pusher->trigger('notifications', 'new_notification', $data);
-
 ?>

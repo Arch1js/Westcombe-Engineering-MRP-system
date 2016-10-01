@@ -3,21 +3,18 @@ var app = angular.module('WEapp', ['ui.bootstrap']);
 function orderCtrl($scope, $http, $filter) { //main controller for stock page
 
   $scope.orders = 'active';
-
   $scope.data = [];
   $scope.dataCount = [];
   $scope.orderWeekArray = [];
   $scope.orderWeek = '';
-
-
   $scope.paginator_bottom = true;
 
   $scope.sort = function(keyname){
-        $scope.sortKey = keyname;   //set the sortKey to the param passed
-        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-    }
+    $scope.sortKey = keyname;   //set the sortKey to the param passed
+    $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+  }
 
-  $scope.setStatusColor = function (i) {
+  $scope.setStatusColor = function (i) {//set status colours
     if (i.Status == "Active") {
       return "btn-success";
     }
@@ -27,7 +24,6 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
     else {
       return "btn-danger";
     }
-
   }
 
   $scope.printOrder = function() { //print orders
@@ -42,7 +38,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
 
     var date = new Date();
     // var weekday = date.getDay(); //get current weekday
-    var weekday = 1;
+    var weekday = 1; //static date for testing
 
     if(weekday == 1) { //get data only on Mondays
       $scope.url = '/users/scripts/writeOrders.php';
@@ -75,7 +71,9 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
        $http.post($scope.url, data);
   }
 
-  $scope.loadData = function(page) {
+  $scope.loadData = function(page) { //load order data
+
+    //hide all things while data is loaded
     $scope.ordersWeek = false;
     $scope.refreshSuccess = false;
     $scope.refreshError = false;
@@ -83,6 +81,7 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
     $scope.paginator_bottom = true;
     $scope.table_body = false;
     $scope.loading = true;
+
     $scope.currentPage = page;
 
     if($scope.pageSizeInput == null) {
@@ -93,58 +92,50 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
       var incr = $scope.pageSizeInput * $scope.currentPage;
     }
 
-    // if($scope.orderWeek == '') {
-    //   var date = 'empty';
-    // }
-    // else {
-      var date = $scope.orderWeek;
-      console.log(date);
-    // }
+    var date = $scope.orderWeek;
     var start = 0;
 
-           var data = {
-             dataCount: incr,
-             start: start,
-             date: date
-       };
-         $scope.url = '/users/scripts/getNewestData.php';
-       $http.post($scope.url, data).
+    var data = {
+      dataCount: incr,
+      start: start,
+      date: date
+    };
+    $scope.url = '/users/scripts/getNewestData.php';
+
+    $http.post($scope.url, data).
        success(function(data,status) {
 
-               $scope.data= data[0]; //save returned data to array
-               $scope.dataCount= data[1];//save number of returned data to array
-               $scope.numberOfItems = $scope.dataCount[0].count;
+         $scope.data= data[0]; //save returned data to array
+         $scope.dataCount= data[1];//save number of returned data to array
+         $scope.numberOfItems = $scope.dataCount[0].count;
 
-              //  $scope.orderWeekArray= data[2];
-              //  $scope.orderWeek = $scope.orderWeekArray[0].week;
+         if($scope.dataCount[0].count == 0) { //if orders database is empty, display error message
+           $scope.dataQueryError = true;
+           $scope.paginator_bottom = true;
+           $scope.loading = false;
+         }
+         else {
+           $scope.loading = false;
+           $scope.table_body = true;
+           $scope.paginator_bottom = false;
+          }
+      });
+}
 
-               if($scope.dataCount[0].count == 0) { //if orders database is empty, display error message
-                 $scope.dataQueryError = true;
-                 $scope.paginator_bottom = true;
-                 $scope.loading = false;
-               }
-               else {
-               $scope.loading = false;
-               $scope.table_body = true;
-               $scope.paginator_bottom = false;
-                }
-       });
-  }
-
-  $scope.getPreviousOrders = function() {
+  $scope.getPreviousOrders = function() { //get next
     $scope.url = '/users/scripts/getPreviousOrders.php';
+
     $http.post($scope.url).
       success(function(data, status) {
         $scope.orderWeekArray= data[0];
         $scope.orderWeek = $scope.orderWeekArray[0].week;
-
         $scope.loadData(1);
       })
   }
 
   $scope.getPreviousOrders();
 
-  $scope.getOlderOrders = function() {
+  $scope.getOlderOrders = function() { //get next page of orders
     $scope.loadData(1);
     $scope.table_body = false;
     $scope.loading = true;
@@ -160,19 +151,15 @@ function orderCtrl($scope, $http, $filter) { //main controller for stock page
 
     $scope.url = '/users/scripts/getOlderOrders.php';
     $http.post($scope.url, data).
-    success(function(data, status) {
-      $scope.data= data[0]; //save returned data to array
-      $scope.dataCount= data[1];//save number of returned data to array
-      $scope.numberOfItems = $scope.dataCount[0].count;
+      success(function(data, status) {
+        $scope.data= data[0]; //save returned data to array
+        $scope.dataCount= data[1];//save number of returned data to array
+        $scope.numberOfItems = $scope.dataCount[0].count;
 
-      $scope.table_body = true;
-      $scope.loading = false;
-
-    });
+        $scope.table_body = true;
+        $scope.loading = false;
+      });
   }
-
-  // $scope.loadData(1);
-
 
 }
 app.filter('start', function () { //splice search results for pagination

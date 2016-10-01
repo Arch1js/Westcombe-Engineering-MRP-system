@@ -1,11 +1,12 @@
-body {
-
-}
 table {
   width: 100%;
 }
 .navbar-brand {
   padding: 5px 15px;
+}
+.pagination {
+	margin: 5px 0px;
+	float: right;
 }
 #profile_image
 {
@@ -29,10 +30,6 @@ table {
 #paginator_bottom {
   float:right;
   display: inline-block;
-}
-.pagination {
-	margin: 5px 0px;
-	float: right;
 }
 #page_controller {
   float:right;

@@ -1,8 +1,8 @@
 <?php
-	include ("../dbconnect.php");
-	// include('writeOrders.php');
-	$data = file_get_contents("php://input");
-	$objData = json_decode($data);
+include ("../dbconnect.php");
+
+$data = file_get_contents("php://input");
+$objData = json_decode($data);
 
 
 $sql = "SELECT DISTINCT Order_Receive_Date as week FROM orders ORDER BY Order_Receive_Date DESC";
@@ -18,5 +18,4 @@ while ($row = mysqli_fetch_array($result)) {
 
 echo json_encode(array($data));
 $stmt->close();
-
 ?>

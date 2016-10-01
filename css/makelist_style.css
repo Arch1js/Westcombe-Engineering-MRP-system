@@ -17,6 +17,10 @@ table {
 .nav-tabs {
   margin-bottom: 5px;
 }
+.pagination {
+	margin: 5px 0px;
+	float: right;
+}
 #profile_image
 {
   height: 50px;
@@ -39,10 +43,6 @@ table {
 #paginator_bottom {
   float:right;
   display: inline-block;
-}
-.pagination {
-	margin: 5px 0px;
-	float: right;
 }
 #page_controller {
   float:right;

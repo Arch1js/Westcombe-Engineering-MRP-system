@@ -25,7 +25,6 @@ if($todaysDateFormated == $makelist_creation_date) {
   return;
 }
 
-
 //get the necessary info from orders table
 $sql = "SELECT id, Consignee_Code, Earliest_Delivery_Date_Time, Supplier_Product_Code, Order_Quantity FROM orders WHERE Order_Receive_Date in (SELECT MAX(Order_Receive_Date) from orders);";
 $stmt = $mysqli->prepare($sql); //prepare sql
@@ -99,7 +98,4 @@ while ($row = mysqli_fetch_array($result)) { //loop trough results and store in 
 
   	}
   }
-
-
-
 ?>

@@ -35,7 +35,6 @@ $userRow=mysqli_fetch_array($res);
 	<div ng-controller="stockTakeCtrl">
 		<nav class="navbar navbar-inverse navbar-default">
 		  <div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
 		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 		        <span class="sr-only">Toggle navigation</span>
@@ -47,8 +46,6 @@ $userRow=mysqli_fetch_array($res);
 		        <img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
 		      </a>
 		    </div>
-
-		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		       <div navbar></div> <!--link to tab directive-->
 		      <ul class="nav navbar-nav navbar-right">
@@ -62,7 +59,6 @@ $userRow=mysqli_fetch_array($res);
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
-
 <div class="col-md-2 col-xs-12">
 	<form ng-submit="quickSearch(1)">
 		<div class="input-group">

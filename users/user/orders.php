@@ -35,7 +35,6 @@ $userRow=mysqli_fetch_array($res);
 <body ng-controller="orderCtrl">
 	<nav class="navbar navbar-inverse navbar-default">
 		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
@@ -47,8 +46,6 @@ $userRow=mysqli_fetch_array($res);
 					<img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
 				</a>
 			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/admin_page.php">Home</a></li>
@@ -65,8 +62,8 @@ $userRow=mysqli_fetch_array($res);
 						</div>
 						</div>
 				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
+			</div>
+		</div>
 	</nav>
 	<div class="col-md-3 col-sm-4 no-print" id="action_buttons">
 		<button type="button" class="btn btn-success" ng-click="loadData(1)"><span class="fa fa-tasks"></span> Load Data</button>

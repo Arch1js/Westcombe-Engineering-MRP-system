@@ -23,6 +23,4 @@ $stmt->bind_param("sssii",$objData->user,$timestamp,$objData->partNo,$objData->o
 
 $stmt->execute();
 $stmt->close();
-
-
 ?>

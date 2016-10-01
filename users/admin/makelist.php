@@ -104,7 +104,7 @@ $userRow=mysqli_fetch_array($res);
 		<th>Delivery Date</th>
 		<th>Stock</th>
 		<th>Order qty</th>
-		<th>Required qty</th>
+		<th>Make qty</th>
 		<th>Trigger qty</th>
 		<th>Replenish qty</th>
 		<th>Status</th>
@@ -169,7 +169,7 @@ $userRow=mysqli_fetch_array($res);
 		 <th>Stock</th>
 		 <th>Order qty</th>
 		 <th>Required qty</th>
-		 <th>Trigger qty</th>
+		 <th>Supply qty</th>
 		 <th>Replenish qty</th>
 		 <th>Status</th>
 		 <th>Comments</th>

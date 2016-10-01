@@ -57,7 +57,5 @@
 				$stmt->bind_param("ssissss", $supplier,$date, $quantity,$consignee,$orderline,$todaysDateFormated, $status);
 				$stmt->execute();
 		}
-
 	}
-
 ?>

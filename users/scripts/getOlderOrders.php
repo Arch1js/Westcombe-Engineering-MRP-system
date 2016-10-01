@@ -1,8 +1,8 @@
 <?php
-	include ("../dbconnect.php");
-	// include('writeOrders.php');
-	$data = file_get_contents("php://input");
-	$objData = json_decode($data);
+include ("../dbconnect.php");
+
+$data = file_get_contents("php://input");
+$objData = json_decode($data);
 
 // $date = '2016-06-13';
 // $start = 0;
