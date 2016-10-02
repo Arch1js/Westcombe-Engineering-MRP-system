@@ -39,33 +39,7 @@ $userRow=mysqli_fetch_array($res);
 	<script src="../../js/directives.js"></script>
 </head>
 <body ng-controller="chartCtrl">
-	<div>
-		<nav class="navbar navbar-inverse navbar-default">
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="#">
-		        <img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
-		      </a>
-		    </div>
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		       <div navbar></div> <!--link to tab directive-->
-		      <ul class="nav navbar-nav navbar-right">
-		        <div id="content">
-		          	<?php echo $userRow['username'];?>
-		              <img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">
-	                <div ng-show="badge" class="badge"><i class="fa fa-bell-o" aria-hidden="true"></i></div></image>
-									<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
-		          </div>
-		      </ul>
-		    </div>
-		  </div>
-		</nav>
+	<div navbar></div> <!--link to tab directive-->
 	<div class="contents">
 		<div class="col-md-12">
 			<div id="line_chart">

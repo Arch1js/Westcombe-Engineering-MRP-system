@@ -9,7 +9,7 @@ if(isset($_SESSION['user'])!="")
     $userEmail = $_POST['user'];
     $userPassword = $_POST['pass'];
 
-    $sql = "SELECT user_id, email, password FROM administrators WHERE email = ? AND password = md5(?)";
+    $sql = "SELECT user_id, username, email, password FROM administrators WHERE email = ? AND password = md5(?)";
 
     $stmt = $mysqli->prepare($sql);
 

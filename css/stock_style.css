@@ -8,6 +8,10 @@ table {
 	margin: 5px 0px;
 	float: right;
 }
+.warning_clr {
+  color: red;
+  font-weight: bold;
+}
 #profile_image
 {
   height: 50px;

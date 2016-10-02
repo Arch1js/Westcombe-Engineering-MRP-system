@@ -11,11 +11,14 @@ function makelistCtrl($scope, $http, $filter) { //main controller for stock page
   }
 
   $scope.setStatusColor = function(i) { //set colours for different statuses
-    if (i.status == "Active") {
-      return "btn-success";
+    if (i.status == "Active" || i.status == "Doing") {
+      return "btn-info";
     }
     else if(i.status == "Pending") {
       return "btn-warning";
+    }
+    else if(i.status == "Done") {
+      return "btn-success";
     }
     else {
       return "btn-danger";

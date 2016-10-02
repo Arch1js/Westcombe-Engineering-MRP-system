@@ -52,6 +52,12 @@ function stockCtrl($scope, $http, $filter) { //main controller for stock page
   		$scope.record = i;
   }
 
+  $scope.setStatusColor = function(i) { //set colours for different statuses
+    if (i.Current_Total_Stock <= i.Trigger_qty) {
+      return "warning_clr";
+    }
+  }
+
   $scope.edit = function() { //show edit icon
     $scope.editrecord = true;
   }

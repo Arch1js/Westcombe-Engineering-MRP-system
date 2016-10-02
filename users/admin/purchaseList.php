@@ -14,7 +14,7 @@ $userRow=mysqli_fetch_array($res);
 ?>
 <html ng-app="WEapp">
 <head>
-  <title>Orders - <?php echo $userRow['username'];?></title>
+  <title>Purchase List - <?php echo $userRow['username'];?></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"><!-- Bootstrap CSS -->
@@ -27,18 +27,18 @@ $userRow=mysqli_fetch_array($res);
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script><!-- Bootstrap JS -->
 
 	<!-- Services -->
-	<script src="../../js/orderFunctions.js"></script>
+	<script src="../../js/purchaseFunctions.js"></script>
 	<!-- Directives -->
 	<script src="../../js/directives.js"></script>
 </head>
-<body ng-controller="orderCtrl">
+<body ng-controller="purchaseCtrl">
 	<div navbar></div> <!--link to tab directive-->
 	<div editorder></div>
 		<div class="col-md-5 col-sm-4 no-print" id="action_buttons" ng-hide="action_buttons">
 			<button type="button" class="btn btn-warning" ng-click="getNewestData()"><span class="fa fa-refresh"></span> Refresh Data</button>
 			<button type="button" class="btn btn-success" ng-click="loadData(1)"><span class="fa fa-tasks"></span> Load Data</button>
 			<button type="button" class="btn btn-danger"  ng-click="editOrder = !editOrder"><span class="fa fa-pencil-square-o"></span> Edit</button>
-			<button type="button" class="btn btn-primary"  ng-click="printOrder()"><span class="fa fa-print"></span> Print Orders</button>
+			<button type="button" class="btn btn-primary"  ng-click="printOrder()"><span class="fa fa-print"></span> Print List</button>
 		</div>
 
 		<div class="col-md-1 no-print" ng-hide="ordersWeek">

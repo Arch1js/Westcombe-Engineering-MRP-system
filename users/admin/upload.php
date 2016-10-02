@@ -12,7 +12,7 @@ else if($_SESSION["privilige"] != 'admin') {
 $res=mysqli_query($mysqli, "SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
 $userRow=mysqli_fetch_array($res);
 ?>
-<html>
+<html ng-app="WEapp">
 <head>
   <title>Welcome - <?php echo $userRow['username'];?></title>
 	<meta charset="UTF-8">
@@ -26,46 +26,13 @@ $userRow=mysqli_fetch_array($res);
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script><!-- JQuery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script><!-- Bootstrap JS -->
 
+	<!-- Services -->
+	<script src="../../js/uploadFunctions.js"></script>
+	<!-- Directives -->
+	<script src="../../js/directives.js"></script>
 </head>
-<body>
-	<div>
-	<nav class="navbar navbar-inverse navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="#">
-	        <img width="70px" height="40px" alt="Westcombe MRP system" src="https://s3-eu-west-1.amazonaws.com/we-asets/westcombe_logo_small.png">
-	      </a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-	        <li><a href="/users/admin/admin_page.php">Home</a></li>
-					<li><a href="/users/admin/manageUsers.php">Users</a></li>
-	        <li><a href="/users/admin/orders.php">Orders</a></li>
-	        <li><a href="/users/admin/stock.php">Stock</a></li>
-	        <li><a href="/users/admin/makelist.php">Makelist</a></li>
-	        <li><a href="/users/admin/metrics.php">Metrics</a></li>
-					<li class="active"><a href="/users/upload.php">Upload</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <div id="content">
-	          	<?php echo $userRow['username'];
-	              $username= $userRow['username'];
-
-	              $res=mysqli_query($mysqli,"SELECT * FROM administrators WHERE user_id=".$_SESSION['user']);
-	              echo '<img id="profile_image" height="300" width="300" src="https://s3-eu-west-1.amazonaws.com/we-asets/photo.png">';
-	              ?>
-								<a href="/users/user_logout.php?logout" title="Logout"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
-	          </div>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
+<body ng-controller="uploadCtrl">
+	<div navbar></div> <!--link to tab directive-->
 	<form action="admin_scripts/file_upload.php" method="post" enctype="multipart/form-data" style="margin-left: 20px;">
     Select CSV to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">

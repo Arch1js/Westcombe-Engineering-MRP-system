@@ -66,7 +66,7 @@ while ($row = mysqli_fetch_array($result)) { //loop trough results and store in 
 
   			$reqQty = abs($stockQty - $orderQty) + $replenish_qty; //get the quantity needed to cover order
 
-  			$status = 'Active'; //sett all makelist items to Active
+  			$status = 'Doing'; //sett all makelist items to Active
         $makelistStatus = 'Make';
 
   			if($stockQty == '') {

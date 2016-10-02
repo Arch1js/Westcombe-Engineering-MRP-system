@@ -66,7 +66,7 @@ app.directive("loading", function () { //loading animation directive
 app.directive("navbar", function () { //navigation bar tabs directive
 	return {
 		restrict: "A",
-		templateUrl: "/users/admin/templates/admin_navTabs.html"
+		templateUrl: "/users/admin/templates/admin_navTabs.php"
 	}
 });
 ///////////////////////////////////////////////////////////////////

@@ -9,7 +9,7 @@ if(isset($_SESSION['user'])!="")
     $userEmail = $_POST['user'];
 		$userPassword = $_POST['pass'];
 
-    $sql = "SELECT user_id, email, password, privilige FROM administrators WHERE email = ?";
+    $sql = "SELECT user_id, username, email, password, privilige FROM administrators WHERE email = ?";
 
     $stmt = $mysqli->prepare($sql);
 
@@ -17,13 +17,15 @@ if(isset($_SESSION['user'])!="")
     $stmt->execute();
 
     $stmt->store_result();
-    $stmt->bind_result($id, $user, $passwd,$privilige);
+    $stmt->bind_result($id, $username, $user, $passwd, $privilige);
 		$stmt->fetch();
 
     if (password_verify($userPassword, $passwd))
     {
 			$_SESSION["user"] = $id;
+			$_SESSION["username"] = $username;
 			$_SESSION["privilige"] = $privilige;
+			
 			if($privilige == 'admin') {
 				header("Location: /users/admin/admin_page.php");
 			}
