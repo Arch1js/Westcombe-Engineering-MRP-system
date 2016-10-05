@@ -95,6 +95,14 @@ $userRow=mysqli_fetch_array($res);
 					<h1>{{i.Stores_Location}}</h1>
 				</div>
 			</div>
+			<div id="controlls" class="col-xs-12">
+				<div class="col-xs-3">
+					<button id="increase" class="btn btn-info" ng-click="increaseValue(i)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+				</div>
+				<div class="col-xs-1">
+					<button id="decrease" class="btn btn-info" ng-click="decreaseValue(i)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+				</div>
+			</div>
 			<div class="col-xs-6">
 				 <input class="form-control input-lg" id="inputlg" type="number" ng-model="i.Finish_Goods_Stock" ng-change="show()">
 			</div>

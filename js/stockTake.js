@@ -25,6 +25,16 @@ $scope.cancel = function() { //cancel stock take action
   $scope.data = angular.copy($scope.copy); //show qty as it was before
 }
 
+$scope.increaseValue = function(i) {
+  i.Finish_Goods_Stock += 1;
+  $scope.show();
+};
+
+$scope.decreaseValue = function(i) {
+  i.Finish_Goods_Stock -= 1;
+  $scope.show();
+};
+
 $scope.show = function() { //show buttons on count change
   $scope.savebtn = true;
   $scope.cancelbtn = true;

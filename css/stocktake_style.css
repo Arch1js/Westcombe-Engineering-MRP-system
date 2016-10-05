@@ -26,3 +26,12 @@ padding: 5px 15px;
 #confirmModal {
   padding-top: 50%;
 }
+#controlls {
+  margin-bottom: 10px;
+}
+#increase {
+  background-color: #00bcd4;
+}
+#decrease {
+  background-color: #607d8b;
+}
